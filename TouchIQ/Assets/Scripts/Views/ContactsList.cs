@@ -19,11 +19,14 @@ public class ContactsList : MonoBehaviour
 
 
 
-        GameObject Test = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/MiddleDial")) as GameObject;
+        GameObject Test = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/Bubble")) as GameObject;
 
         Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
-        Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 180, 0);
+        Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test.GetComponent<RectTransform>().localScale = new Vector3(.35f, .35f, 1);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 500);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -30);
+        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 30);
     }
 }
