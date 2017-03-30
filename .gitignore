@@ -1,0 +1,53 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+
+# =============== #
+# Card Data       #
+# =============== #
+jsoncarddata/
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ================ #
+# Python generated #
+# ================ #
+*.pyc
+
+# ============ #
+# SqlLite DB   #
+# ============ # 
+*.sqlite3
+backend/*.sqlite3
+
+# ============= #
+# Intellij Idea #
+# ============= # 
+.idea/ 
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
