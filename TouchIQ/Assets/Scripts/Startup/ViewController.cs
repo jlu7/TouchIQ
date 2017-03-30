@@ -29,9 +29,7 @@ public class ViewController : MonoBehaviour
         Views.Push(AnchorRef);
         GameObject FrontPage = Instantiate(Resources.Load<GameObject>("2.0/ContactsScreen")) as GameObject;
         FrontPage.transform.SetParent(AnchorRef, false);
-
         Views.Push(FrontPage.transform);
-        //GameObject FrontPage = Instantiate(Resources.Load<GameObject>("CardDetail/CardDetail")) as GameObject;
     }
 
     public GameObject CreateView(string ViewLocation)
