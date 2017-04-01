@@ -27,7 +27,7 @@ public class ViewController : MonoBehaviour
         Views = new Stack<Transform>();
         AnchorRef = anchorRef;
         Views.Push(AnchorRef);
-        GameObject FrontPage = Instantiate(Resources.Load<GameObject>("2.0/ContactsScreen")) as GameObject;
+        GameObject FrontPage = Instantiate(Resources.Load<GameObject>("Prefabs/ContactsScreen/ContactsScreen")) as GameObject;
         FrontPage.transform.SetParent(AnchorRef, false);
         Views.Push(FrontPage.transform);
     }

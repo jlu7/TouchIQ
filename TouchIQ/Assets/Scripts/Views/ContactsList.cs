@@ -8,7 +8,7 @@ public class ContactsList : MonoBehaviour
 
 	private void Start ()
     {
-        GameObject MiddleDial = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/MiddleDial")) as GameObject;
+        GameObject MiddleDial = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial")) as GameObject;
 
         MainPanel = this.GetComponent<RectTransform>().Find("Panel").GetComponent<RectTransform>();
         MiddleDial.GetComponent<RectTransform>().SetParent(MainPanel.transform);
@@ -19,7 +19,7 @@ public class ContactsList : MonoBehaviour
 
 
 
-        GameObject Test = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/Bubble")) as GameObject;
+        GameObject Test = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble")) as GameObject;
 
         Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -29,7 +29,7 @@ public class ContactsList : MonoBehaviour
         Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -20);
         Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 20);
 
-        GameObject Test1 = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/Bubble")) as GameObject;
+        GameObject Test1 = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble")) as GameObject;
 
         Test1.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -39,7 +39,7 @@ public class ContactsList : MonoBehaviour
         Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 20);
         Test1.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -20);
 
-        GameObject Test2 = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/Bubble")) as GameObject;
+        GameObject Test2 = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble")) as GameObject;
 
         Test2.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -49,7 +49,7 @@ public class ContactsList : MonoBehaviour
         Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -60);
         Test2.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 60);
 
-        GameObject Test3 = Instantiate(Resources.Load<GameObject>("2.0/FrontPageButtons/Bubble")) as GameObject;
+        GameObject Test3 = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble")) as GameObject;
 
         Test3.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
