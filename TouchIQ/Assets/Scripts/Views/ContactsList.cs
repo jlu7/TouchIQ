@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ContactsList : MonoBehaviour
 {
@@ -16,7 +17,11 @@ public class ContactsList : MonoBehaviour
         MiddleDial.GetComponent<RectTransform>().localPosition = new Vector3(0, 100, 0);
         MiddleDial.GetComponent<RectTransform>().localScale = new Vector3(2, 2, 1);
 
-
+        Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
+        callButton.onClick.AddListener(() => 
+        {
+            ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
+        });
 
 
         GameObject Test = Instantiate(Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble")) as GameObject;
@@ -61,7 +66,7 @@ public class ContactsList : MonoBehaviour
 
 
         GameObject prefab4 = Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle");
-        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, this.transform.Find("Panel"));
+        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, MainPanel.transform);
 
 
     }
