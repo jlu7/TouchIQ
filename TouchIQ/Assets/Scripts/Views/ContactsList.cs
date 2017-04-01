@@ -58,5 +58,11 @@ public class ContactsList : MonoBehaviour
         Test3.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 500);
         Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 60);
         Test3.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -60);
+
+
+        GameObject prefab4 = Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle");
+        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, this.transform.Find("Panel"));
+
+
     }
 }
