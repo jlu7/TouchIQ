@@ -17,7 +17,7 @@ public class ContactsList : MonoBehaviour
         Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
         callButton.onClick.AddListener(() => 
         {
-            ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall2");
+            ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
         });
 
         GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
