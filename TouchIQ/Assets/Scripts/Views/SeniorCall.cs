@@ -24,6 +24,5 @@ public class SeniorCall : MonoBehaviour {
     void OnVideoStart()
     {
         remoteUserPanel.SetActive(false);
-        localUserPanel.SetActive(false);
     }
 }
