@@ -7,7 +7,7 @@ public class Popsicle : MonoBehaviour
 {
     Button ButtonComponent;
     RectTransform View;
-    bool ViewIsVisible = true;
+    bool ViewIsVisible = false;
 
     IEnumerator IEShowScrollView;
 
