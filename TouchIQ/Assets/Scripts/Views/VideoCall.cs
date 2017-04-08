@@ -14,8 +14,6 @@ public class VideoCall : Photon.MonoBehaviour
     public Compression compression;
     public EchoCancellation echoCancellation;
 
-    // Stream or broadcast from one person to many others?
-    public bool oneToManyBroadcast;
     public int numberReceivers = 2;
 
     // UI related controls
@@ -41,7 +39,7 @@ public class VideoCall : Photon.MonoBehaviour
     private float currentAudioThreshold = 0.001f;
     private float setAudioThresholdTimer;
 
-    private bool connectedToMaster = false;
+    private bool roomJoined = false;
     // Use this for initialization
     IEnumerator Start ()
     {
@@ -58,13 +56,7 @@ public class VideoCall : Photon.MonoBehaviour
         //videoView.ObservedComponents.Add(this);
         videoView.viewID = 2;
 
-        if (Application.internetReachability != NetworkReachability.NotReachable)
-            PhotonNetwork.ConnectUsingSettings("1.0");
-
-        if (Application.isWebPlayer)
-        {
-            yield return Application.RequestUserAuthorization(UserAuthorization.WebCam | UserAuthorization.Microphone);
-        }
+        yield return null;
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -101,9 +93,11 @@ public class VideoCall : Photon.MonoBehaviour
         TypedLobby typedLobby = new TypedLobby();
         typedLobby.Name = "chat";
         typedLobby.Type = LobbyType.Default;
-        PhotonNetwork.JoinLobby(typedLobby);
+        //PhotonNetwork.JoinLobby(typedLobby);
 
-        while (!connectedToMaster)
+        PhotonNetwork.JoinOrCreateRoom("MidnightVideoChat", roomOptions, (null != PhotonNetwork.lobby) ? PhotonNetwork.lobby : typedLobby);
+
+        while (!roomJoined)
         {
             yield return null;
         }
@@ -113,7 +107,7 @@ public class VideoCall : Photon.MonoBehaviour
             UnityEngine.Debug.Log("ROOM EXISTS");
         }
 
-        PhotonNetwork.JoinOrCreateRoom("MidnightVideoChat", roomOptions, typedLobby);
+        
         //PhotonNetwork.CreateRoom("MidnightVideoChat", roomOptions, typedLobby);
         PhotonNetwork.NetworkStatisticsEnabled = true;
         //PhotonNetwork.GetRoomList()
@@ -226,7 +220,7 @@ public class VideoCall : Photon.MonoBehaviour
         // Comment this out or add conditional logic to control the recording process and then do something interesting with those lists of packets
         VideoChat.ClearReceivedPackets();
 
-        if (Input.mousePosition.x == lastMousePosition.x && Input.mousePosition.y == lastMousePosition.y)
+        /*if (Input.mousePosition.x == lastMousePosition.x && Input.mousePosition.y == lastMousePosition.y)
         {
             mouseStillCount++;
             if (mouseStillCount > mouseStillThreshold)
@@ -239,7 +233,7 @@ public class VideoCall : Photon.MonoBehaviour
             mouseStillCount = 0;
             UI = true;
         }
-        lastMousePosition = Input.mousePosition;
+        lastMousePosition = Input.mousePosition;*/
 
         if (Input.GetKey(KeyCode.Escape))
             Application.Quit();
@@ -250,15 +244,6 @@ public class VideoCall : Photon.MonoBehaviour
         {
             VideoChat.PostVideo();
             return;
-        }
-
-        if (oneToManyBroadcast)
-        {
-            if ((!testMode && !PhotonNetwork.isMasterClient) || (PhotonNetwork.isMasterClient && PhotonNetwork.otherPlayers.Length < 1))
-            {
-                VideoChat.PostVideo();
-                return;
-            }
         }
 
         #region AUDIO
@@ -321,8 +306,6 @@ public class VideoCall : Photon.MonoBehaviour
     void ReceiveVideo(int x, int y, byte[] videoData, double timestamp)
     {
         VideoChat.ToVideo(x, y, videoData, timestamp);
-        if (oneToManyBroadcast && !PhotonNetwork.isMasterClient)
-            videoView.RPC("ReceiveVideo", PhotonTargets.MasterClient, VideoChat.requestedWidth, VideoChat.requestedHeight, new byte[3], VideoChat.CurrentTimestamp());
     }
 
     [PunRPC]
@@ -346,8 +329,6 @@ public class VideoCall : Photon.MonoBehaviour
     void OnPhotonPlayerConnected(PhotonPlayer player)
     {
         VideoChat.deviceIndex = VideoChat.deviceIndex; //This resets the camera to prepare for a new connection
-        if (oneToManyBroadcast && PhotonNetwork.isMasterClient)
-            videoView.RPC("ReceiveVideo", player, VideoChat.requestedWidth, VideoChat.requestedHeight, new byte[2], VideoChat.CurrentTimestamp());
     }
 
     void OnDisconnectedFromPhoton()
@@ -361,10 +342,16 @@ public class VideoCall : Photon.MonoBehaviour
         UnityEngine.Debug.LogError("OnJoinedLobby");
     }
 
+    void OnJoinedRoom()
+    {
+        UnityEngine.Debug.LogError("OnJoinedRoom");
+        roomJoined = true;
+    }
+
     void OnConnectedToMaster()
     {
         UnityEngine.Debug.LogError("OnConnectedToMaster");
-        connectedToMaster = true;
+        //connectedToMaster = true;
     }
 
     IEnumerator IncrementWindowsCamera()

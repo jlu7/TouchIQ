@@ -8,6 +8,8 @@ using Object = UnityEngine.Object;
 
 public class ViewController : MonoBehaviour 
 {
+    public GameObject CurrentView;
+
     private static ViewController VC;
     private static Stack<Transform> Views;
     private Transform AnchorRef;
@@ -26,10 +28,11 @@ public class ViewController : MonoBehaviour
         // Create The FrontPage
         Views = new Stack<Transform>();
         AnchorRef = anchorRef;
-        Views.Push(AnchorRef);
-        GameObject FrontPage = Instantiate(Resources.Load<GameObject>("Prefabs/ContactsScreen/ContactsScreen")) as GameObject;
-        FrontPage.transform.SetParent(AnchorRef, false);
-        Views.Push(FrontPage.transform);
+        //Views.Push(AnchorRef);
+        //GameObject FrontPage = Instantiate(Resources.Load<GameObject>("Prefabs/ContactsScreen/ContactsScreen")) as GameObject;
+        GameObject FrontPage = CreateView("Prefabs/ContactsScreen/ContactsScreen");
+        //FrontPage.transform.SetParent(AnchorRef, false);
+        //Views.Push(FrontPage.transform);
     }
 
     public GameObject CreateView(string ViewLocation)
@@ -40,11 +43,16 @@ public class ViewController : MonoBehaviour
 
     public void PushView(GameObject NewView)
     {
-        Destroy(Views.Pop().gameObject);
+        if(Views.Count > 0)
+        {
+            Destroy(Views.Pop().gameObject);
+        }
+        
         NewView.transform.parent = AnchorRef;
         //NewView.transform.localScale = new Vector3(1, 1, 1);
         //NewView.transform.localPosition = new Vector3(0, 0, 0);
 
         Views.Push(NewView.transform);
+        CurrentView = NewView;
     }
 }
