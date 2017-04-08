@@ -25,6 +25,8 @@ public class SeniorCall : MonoBehaviour {
 
         GameObject videoCallPrefab = Resources.Load<GameObject>("Prefabs/SeniorCall/VideoCall");
         videoCall = GameObject.Instantiate<GameObject>(videoCallPrefab);
+        videoCall.transform.SetParent(this.transform);
+        videoCall.transform.localPosition = Vector3.zero;
 
         StartCoroutine(videoCall.GetComponent<VideoCall>().SetupVideo(OnVideoStart));
     }
