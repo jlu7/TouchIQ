@@ -7,7 +7,7 @@ public class UserPanel : MonoBehaviour
 {
     Button ButtonComponent;
     RectTransform ScrollView;
-    bool ScrollViewIsVisible = false;
+    bool ScrollViewIsVisible = true;
 
     IEnumerator IEShowScrollView;
 
