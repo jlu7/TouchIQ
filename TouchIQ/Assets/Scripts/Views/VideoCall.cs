@@ -127,7 +127,7 @@ public class VideoCall : Photon.MonoBehaviour
         
     }
 
-    void Restart()
+    public void Restart()
     {
         VideoChat.ClearAudioOut();
 
@@ -137,7 +137,7 @@ public class VideoCall : Photon.MonoBehaviour
         Resources.UnloadUnusedAssets();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+    /*
     void OnGUI()
     {
         if (!VideoChat.tempImage && !VideoChat.setup || !UI)
@@ -216,7 +216,8 @@ public class VideoCall : Photon.MonoBehaviour
 
         return;
     }
-    
+    */
+
     void Update()
     {
 
