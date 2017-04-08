@@ -13,7 +13,7 @@ public class UserPanel : MonoBehaviour
 
     void Start()
     {
-        ButtonComponent = this.GetComponent<Button>();
+        ButtonComponent = transform.Find("BG").GetComponent<Button>();
         ScrollView = this.transform.Find("Mask/ScrollView").GetComponent<RectTransform>();
         ButtonComponent.onClick.AddListener(ShowScrollView);
     }
@@ -41,14 +41,12 @@ public class UserPanel : MonoBehaviour
         }
 
         ScrollViewIsVisible = !ScrollViewIsVisible;
-        Debug.Log(ScrollViewIsVisible);
 
         float speed = 2000;
         Vector2 target = new Vector2(ScrollView.anchoredPosition.x, y);
 
         while (ScrollView.anchoredPosition.y != y)
         {
-            Debug.Log("LDSJF:LKDSJF");
             float step = speed * Time.deltaTime;
             ScrollView.anchoredPosition = Vector2.MoveTowards(ScrollView.anchoredPosition, target, step);
             yield return null;
