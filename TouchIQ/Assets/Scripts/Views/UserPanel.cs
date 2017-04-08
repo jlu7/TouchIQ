@@ -20,7 +20,7 @@ public class UserPanel : MonoBehaviour
 
     // Show is at y = 110
     // Hidden is at y = 850
-    protected void ShowScrollView()
+    public void ShowScrollView()
     {
         if (IEShowScrollView != null)
         {
@@ -31,7 +31,7 @@ public class UserPanel : MonoBehaviour
 
         StartCoroutine(IEShowScrollView);
     }
-    protected IEnumerator coShowScrollView()
+    public IEnumerator coShowScrollView()
     {
         int y = 110;
 

@@ -7,6 +7,7 @@ public class SeniorCall : MonoBehaviour {
 
     GameObject remoteUserPanel;
     GameObject localUserPanel;
+    UserPanel UserPanelRef;
 
     GameObject videoCall;
 
@@ -17,6 +18,7 @@ public class SeniorCall : MonoBehaviour {
     {
         remoteUserPanel = transform.Find("Panel").gameObject;
         localUserPanel = transform.Find("UserPanel").gameObject;
+        UserPanelRef = localUserPanel.AddComponent<UserPanel>();
         endCall = transform.Find("BottomBar/CallButton").GetComponent<Button>();
         endCall.onClick.AddListener(() =>
         {
@@ -29,11 +31,20 @@ public class SeniorCall : MonoBehaviour {
         videoCall.transform.localPosition = Vector3.zero;
 
         StartCoroutine(videoCall.GetComponent<VideoCall>().SetupVideo(OnVideoStart));
-        transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
+        DragSlot dragComponent = transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
+        dragComponent.method += SharedPhotoViewOn;
     }
 
     void OnVideoStart()
     {
         remoteUserPanel.SetActive(false);
+    }
+
+    void SharedPhotoViewOn()
+    {
+        transform.Find("SharedPhoto/X").gameObject.SetActive(true);
+        transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
+        transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
+        UserPanelRef.ShowScrollView();
     }
 }
