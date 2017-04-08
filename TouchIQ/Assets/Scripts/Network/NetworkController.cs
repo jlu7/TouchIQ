@@ -67,7 +67,7 @@ public class NetworkController : Photon.MonoBehaviour
         {
             if (ViewController.GetInstance().CurrentView.name.Contains("Contact"))
             {
-                ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
+                ViewController.GetInstance().CreateView("Prefabs/SeniorCall/IncomingCallScreen");
             }
         }
     }
