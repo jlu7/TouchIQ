@@ -7,7 +7,7 @@ using System;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject itemBeingDragged;
+    public static GameObject itemBeingDragged;
     Vector3 startPosition;
     Vector3 Difference = new Vector3();
 

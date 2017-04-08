@@ -29,12 +29,11 @@ public class SeniorCall : MonoBehaviour {
         videoCall.transform.localPosition = Vector3.zero;
 
         StartCoroutine(videoCall.GetComponent<VideoCall>().SetupVideo(OnVideoStart));
+        transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
     }
 
     void OnVideoStart()
     {
         remoteUserPanel.SetActive(false);
-
-
     }
 }
