@@ -45,11 +45,11 @@ public class SeniorCall : MonoBehaviour {
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
-        transform.Find("SharedPhoto/Albums/Scroll View/Viewport/Content").GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50);
+        transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50);
 
         int middle = Mathf.FloorToInt(ViewController.GetInstance().CurrentView.GetComponent<RectTransform>().rect.width);
         Debug.Log(middle);
-        transform.Find("SharedPhoto/Albums/Scroll View/Viewport/Content").GetComponent<HorizontalLayoutGroup>().padding.left = middle /2 -250;
+        transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<HorizontalLayoutGroup>().padding.left = middle / 2 - 250;
         UserPanelRef.ShowScrollView();
     }
 }
