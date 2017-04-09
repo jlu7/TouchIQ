@@ -51,22 +51,31 @@ public class SeniorCall : MonoBehaviour {
         Debug.Log(middle);
         transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<HorizontalLayoutGroup>().padding.left = middle / 2 - 250;
         UserPanelRef.ShowScrollView();
-/*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
-        Right.onClick.RemoveAllListeners();
 
-        Right.onClick.AddListener(() =>
+        Button closeButton = transform.Find("SharedPhoto/X").GetComponent<Button>();
+        closeButton.onClick.RemoveAllListeners();
+
+        closeButton.onClick.AddListener(() =>
         {
-            MoveAction(-550);
+            CloseShareScreen();
         });
 
-        Button Left = transform.Find("SharedPhoto/Albums/LeftButton").GetComponent<Button>();
-        Left.onClick.RemoveAllListeners();
+        /*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
+                Right.onClick.RemoveAllListeners();
 
-        Left.onClick.AddListener(() =>
-        {
-            MoveAction(550);
-        });
-        */
+                Right.onClick.AddListener(() =>
+                {
+                    MoveAction(-550);
+                });
+
+                Button Left = transform.Find("SharedPhoto/Albums/LeftButton").GetComponent<Button>();
+                Left.onClick.RemoveAllListeners();
+
+                Left.onClick.AddListener(() =>
+                {
+                    MoveAction(550);
+                });
+                */
     }
 
     IEnumerator IEMoveAction;
@@ -98,5 +107,12 @@ public class SeniorCall : MonoBehaviour {
         }
 
         IEMoveAction = null;
+    }
+
+    private void CloseShareScreen()
+    {
+        transform.Find("SharedPhoto/X").gameObject.SetActive(false);
+        transform.Find("SharedPhoto/Albums").gameObject.SetActive(false);
+        transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(true);
     }
 }
