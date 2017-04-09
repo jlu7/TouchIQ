@@ -51,7 +51,7 @@ public class SeniorCall : MonoBehaviour {
         Debug.Log(middle);
         transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<HorizontalLayoutGroup>().padding.left = middle / 2 - 250;
         UserPanelRef.ShowScrollView();
-        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
+/*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
         Right.onClick.RemoveAllListeners();
 
         Right.onClick.AddListener(() =>
@@ -66,6 +66,7 @@ public class SeniorCall : MonoBehaviour {
         {
             MoveAction(550);
         });
+        */
     }
 
     IEnumerator IEMoveAction;
