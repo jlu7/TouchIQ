@@ -23,7 +23,6 @@ public class PictureSelector : MonoBehaviour {
             go.GetComponent<RectTransform>().localScale = Vector3.one;
             //Resources.Load<Sprite>("Textures/picture" + (i + 1).ToString());
             go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/picture" + (i).ToString());
-            go.GetComponent<DragSlot>().SetIndex(i);
         }
         
 	}

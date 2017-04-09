@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragSlot : MonoBehaviour, IDropHandler
 {
-    public delegate void MyDelegate();
+    public delegate void MyDelegate(Sprite spr);
     public MyDelegate method;
 
     public GameObject item
@@ -28,7 +29,8 @@ public class DragSlot : MonoBehaviour, IDropHandler
         {
             if (DragHandler.itemBeingDragged != null)
             {
-                method();
+                
+                method(DragHandler.itemBeingDragged.GetComponent<Image>().sprite);
             }
         }
     }
