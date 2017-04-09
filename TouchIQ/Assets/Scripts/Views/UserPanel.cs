@@ -54,4 +54,11 @@ public class UserPanel : MonoBehaviour
         }
 
     }
+
+    void Update()
+    {
+        VideoChat.localView = true;
+        if (null != VideoChat.localViewTexture)
+            transform.Find("BG/User").GetComponent<CanvasRenderer>().SetTexture(VideoChat.localViewTexture);
+    }
 }
