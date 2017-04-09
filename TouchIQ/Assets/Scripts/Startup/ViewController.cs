@@ -48,7 +48,7 @@ public class ViewController : MonoBehaviour
             Destroy(Views.Pop().gameObject);
         }
         
-        NewView.transform.parent = AnchorRef;
+        NewView.transform.SetParent(AnchorRef);
         NewView.GetComponent<RectTransform>().anchorMax = new Vector2(.5f, .5f);
         NewView.GetComponent<RectTransform>().anchorMin = new Vector2(.5f, .5f);
         NewView.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);

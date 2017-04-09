@@ -40,7 +40,7 @@ public class SeniorCall : MonoBehaviour {
         remoteUserPanel.SetActive(false);
     }
 
-    void SharedPhotoViewOn()
+    private void SharedPhotoViewOn()
     {
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
@@ -51,5 +51,51 @@ public class SeniorCall : MonoBehaviour {
         Debug.Log(middle);
         transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<HorizontalLayoutGroup>().padding.left = middle / 2 - 250;
         UserPanelRef.ShowScrollView();
+        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
+        Right.onClick.RemoveAllListeners();
+
+        Right.onClick.AddListener(() =>
+        {
+            MoveAction(-550);
+        });
+
+        Button Left = transform.Find("SharedPhoto/Albums/LeftButton").GetComponent<Button>();
+        Left.onClick.RemoveAllListeners();
+
+        Left.onClick.AddListener(() =>
+        {
+            MoveAction(550);
+        });
+    }
+
+    IEnumerator IEMoveAction;
+
+    // Show is at y = 110
+    // Hidden is at y = 850
+    public void MoveAction(int move)
+    {
+        if (IEMoveAction == null)
+        {
+            IEMoveAction = coMoveAction(move);
+
+            StartCoroutine(IEMoveAction);
+        }
+    }
+
+    private IEnumerator coMoveAction(int move)
+    {
+        RectTransform content = transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<RectTransform>();
+
+        float speed = 2000;
+        Vector2 target = new Vector2(content.anchoredPosition.x + move, content.anchoredPosition.y);
+
+        while (content.anchoredPosition.x != content.anchoredPosition.x + move)
+        {
+            float step = speed * Time.deltaTime;
+            content.anchoredPosition = Vector2.MoveTowards(content.anchoredPosition, target, step);
+            yield return null;
+        }
+
+        IEMoveAction = null;
     }
 }

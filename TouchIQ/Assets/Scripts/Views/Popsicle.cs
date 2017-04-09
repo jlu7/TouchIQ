@@ -31,6 +31,7 @@ public class Popsicle : MonoBehaviour
 
         StartCoroutine(IEShowScrollView);
     }
+
     protected IEnumerator coShowScrollView()
     {
         int y = 0;
