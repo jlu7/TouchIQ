@@ -40,12 +40,14 @@ public class SeniorCall : MonoBehaviour {
         remoteUserPanel.SetActive(false);
     }
 
-    private void SharedPhotoViewOn()
+    private void SharedPhotoViewOn(int imgIndex)
     {
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
-        transform.Find("SharedPhoto/Albums/Viewport/Content").GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50);
+        var contentView = transform.Find("SharedPhoto/Albums/Viewport/Content");
+        contentView.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50);
+        contentView.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/picture" + (imgIndex).ToString());
 
         int middle = Mathf.FloorToInt(ViewController.GetInstance().CurrentView.GetComponent<RectTransform>().rect.width);
         Debug.Log(middle);
