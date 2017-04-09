@@ -9,8 +9,27 @@ public class DragSlot : MonoBehaviour, IDropHandler
     public delegate void MyDelegate();
     public MyDelegate method;
 
+    public GameObject item
+    {
+        get
+        {
+            if (transform.childCount > 0)
+            {
+                return transform.GetChild(0).gameObject;
+            }
+            return null;
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
-        method();
+        Debug.Log(name);
+        if (!item)
+        {
+            if (DragHandler.itemBeingDragged != null)
+            {
+                method();
+            }
+        }
     }
 }
