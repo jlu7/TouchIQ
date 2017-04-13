@@ -19,6 +19,7 @@ public class ContactsList : MonoBehaviour
         Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
         callButton.onClick.AddListener(() => 
         {
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
         });
 

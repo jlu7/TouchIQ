@@ -22,6 +22,7 @@ public class SeniorCall : MonoBehaviour {
         endCall = transform.Find("BottomBar/CallButton").GetComponent<Button>();
         endCall.onClick.AddListener(() =>
         {
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             videoCall.GetComponent<VideoCall>().Restart();
         });
 
@@ -71,6 +72,7 @@ public class SeniorCall : MonoBehaviour {
 
         closeButton.onClick.AddListener(() =>
         {
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             CloseShareScreen();
         });
 

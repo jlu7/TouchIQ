@@ -22,7 +22,7 @@ public class Popsicle : MonoBehaviour
     // Hidden is at y = -406
     protected void ShowScrollView()
     {
-        SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
+        SoundManager.GetInstance().PlaySingle("SoundFX/digi_plink");
 
         if (IEShowScrollView != null)
         {
@@ -51,7 +51,6 @@ public class Popsicle : MonoBehaviour
 
         while (View.anchoredPosition.y != y)
         {
-            Debug.Log("LDSJF:LKDSJF");
             float step = speed * Time.deltaTime;
             View.anchoredPosition = Vector2.MoveTowards(View.anchoredPosition, target, step);
             yield return null;

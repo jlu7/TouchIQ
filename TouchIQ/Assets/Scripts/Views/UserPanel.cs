@@ -22,6 +22,7 @@ public class UserPanel : MonoBehaviour
     // Hidden is at y = 850
     public void ShowScrollView()
     {
+        SoundManager.GetInstance().PlaySingle("SoundFX/digi_plink");
         if (IEShowScrollView != null)
         {
             StopCoroutine(IEShowScrollView);

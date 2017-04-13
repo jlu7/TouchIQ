@@ -16,6 +16,7 @@ public class IncomingCall : MonoBehaviour
         acceptButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().StopAllLoopingSoundEffects();
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
         });
 
@@ -23,6 +24,7 @@ public class IncomingCall : MonoBehaviour
         declineButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().StopAllLoopingSoundEffects();
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             ViewController.GetInstance().CreateView("Prefabs/ContactsScreen/ContactsScreen");
         });
     }
