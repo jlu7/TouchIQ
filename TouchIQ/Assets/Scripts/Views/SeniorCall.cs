@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SeniorCall : MonoBehaviour {
 
     GameObject remoteUserPanel;
+    CanvasRenderer calleeCanvas;
     GameObject localUserPanel;
     UserPanel UserPanelRef;
 
@@ -17,6 +18,7 @@ public class SeniorCall : MonoBehaviour {
     void Start ()
     {
         remoteUserPanel = transform.Find("Panel").gameObject;
+        calleeCanvas = remoteUserPanel.transform.Find("Callee").GetComponent<CanvasRenderer>();
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
         endCall = transform.Find("BottomBar/CallButton").GetComponent<Button>();
@@ -44,7 +46,7 @@ public class SeniorCall : MonoBehaviour {
 
     void OnVideoStart()
     {
-        remoteUserPanel.SetActive(false);
+        //remoteUserPanel.SetActive(false);
     }
 
     private void ReceivedNetworkPhoto(string photoName)
@@ -132,5 +134,11 @@ public class SeniorCall : MonoBehaviour {
         transform.Find("SharedPhoto/X").gameObject.SetActive(false);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(false);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(true);
+    }
+
+    void Update()
+    {
+        if (null != VideoChat.networkTexture)
+            calleeCanvas.SetTexture(VideoChat.networkTexture);
     }
 }

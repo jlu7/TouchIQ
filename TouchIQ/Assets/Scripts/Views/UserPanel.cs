@@ -8,6 +8,7 @@ public class UserPanel : MonoBehaviour
     Button ButtonComponent;
     RectTransform ScrollView;
     bool ScrollViewIsVisible = true;
+    CanvasRenderer LocalViewCanvas;
 
     IEnumerator IEShowScrollView;
 
@@ -16,6 +17,7 @@ public class UserPanel : MonoBehaviour
         ButtonComponent = transform.Find("BG").GetComponent<Button>();
         ScrollView = this.transform.Find("Mask/ScrollView").GetComponent<RectTransform>();
         ButtonComponent.onClick.AddListener(ShowScrollView);
+        LocalViewCanvas = transform.Find("BG/User").GetComponent<CanvasRenderer>();
     }
 
     // Show is at y = 110
@@ -60,6 +62,6 @@ public class UserPanel : MonoBehaviour
     {
         VideoChat.localView = true;
         if (null != VideoChat.localViewTexture)
-            transform.Find("BG/User").GetComponent<CanvasRenderer>().SetTexture(VideoChat.localViewTexture);
+            LocalViewCanvas.SetTexture(VideoChat.localViewTexture);
     }
 }
