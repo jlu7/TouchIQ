@@ -54,6 +54,5 @@ public class Popsicle : MonoBehaviour
             View.anchoredPosition = Vector2.MoveTowards(View.anchoredPosition, target, step);
             yield return null;
         }
-
     }
 }
