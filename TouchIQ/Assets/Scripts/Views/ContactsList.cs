@@ -35,7 +35,7 @@ public class ContactsList : MonoBehaviour
         Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 20);
         Test.GetComponent<Button>().onClick.AddListener(() =>
         {
-            SoundManager.GetInstance().PlaySingle(Resources.Load<AudioClip>("SoundFX/music_marimba_chord"));
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite);
         });
 
@@ -52,7 +52,7 @@ public class ContactsList : MonoBehaviour
         Test1.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -20);
         Test1.GetComponent<Button>().onClick.AddListener(() =>
         {
-            SoundManager.GetInstance().PlaySingle(Resources.Load<AudioClip>("SoundFX/music_marimba_chord"));
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage1.sprite);
         });
 
@@ -69,7 +69,7 @@ public class ContactsList : MonoBehaviour
         Test2.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 60);
         Test2.GetComponent<Button>().onClick.AddListener(() =>
         {
-            SoundManager.GetInstance().PlaySingle(Resources.Load<AudioClip>("SoundFX/music_marimba_chord"));
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage2.sprite);
         });
 
@@ -86,7 +86,7 @@ public class ContactsList : MonoBehaviour
         Test3.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -60);
         Test3.GetComponent<Button>().onClick.AddListener(() =>
         {
-            SoundManager.GetInstance().PlaySingle(Resources.Load<AudioClip>("SoundFX/music_marimba_chord"));
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
         });
 

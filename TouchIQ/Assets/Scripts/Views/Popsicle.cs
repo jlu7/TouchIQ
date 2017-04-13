@@ -22,6 +22,8 @@ public class Popsicle : MonoBehaviour
     // Hidden is at y = -406
     protected void ShowScrollView()
     {
+        SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
+
         if (IEShowScrollView != null)
         {
             StopCoroutine(IEShowScrollView);
