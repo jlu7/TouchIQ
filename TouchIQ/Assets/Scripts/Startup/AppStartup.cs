@@ -20,5 +20,6 @@ public class AppStartup : MonoBehaviour
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
         yield return null;
         ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
+        SoundManager.GetInstance();
     }
 }
