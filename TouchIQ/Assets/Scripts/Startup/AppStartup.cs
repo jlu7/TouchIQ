@@ -15,7 +15,7 @@ public class AppStartup : MonoBehaviour
 
     IEnumerator Startup()
     {
-        this.gameObject.AddComponent<NetworkController>();
+        StartCoroutine(NetworkController.GetInstance().Connect());
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
         yield return null;

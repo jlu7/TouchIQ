@@ -33,11 +33,23 @@ public class SeniorCall : MonoBehaviour {
         StartCoroutine(videoCall.GetComponent<VideoCall>().SetupVideo(OnVideoStart));
         DragSlot dragComponent = transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
         dragComponent.method += SharedPhotoViewOn;
+        NetworkController.GetInstance().OnPhotoReceived += ReceivedNetworkPhoto;
+    }
+
+    void OnDestroy()
+    {
+        NetworkController.GetInstance().OnPhotoReceived -= ReceivedNetworkPhoto;
     }
 
     void OnVideoStart()
     {
         remoteUserPanel.SetActive(false);
+    }
+
+    private void ReceivedNetworkPhoto(string photoName)
+    {
+        Sprite spr = Resources.Load<Sprite>("Textures/" + photoName);
+        SharedPhotoViewOn(spr);
     }
 
     private void SharedPhotoViewOn(Sprite spr)
@@ -61,6 +73,8 @@ public class SeniorCall : MonoBehaviour {
         {
             CloseShareScreen();
         });
+
+        NetworkController.GetInstance().SendPhotoMessage(spr.name);
 
         /*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
                 Right.onClick.RemoveAllListeners();

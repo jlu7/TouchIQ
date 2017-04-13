@@ -1,21 +1,34 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkController : Photon.MonoBehaviour
 {
+    private static NetworkController networkController;
+
+    public static NetworkController GetInstance()
+    {
+        if (networkController == null)
+        {
+            networkController = new GameObject("NetworkController").AddComponent<NetworkController>();
+        }
+        return networkController;
+    }
+    public delegate void PhotoReceived(string photoName);
+    public event PhotoReceived OnPhotoReceived = (string photoName) => { };
 
     private bool connectedToMaster = false;
 
-    // Use this for initialization
-    void Start ()
-    {
-        StartCoroutine(Connect());
-        
-    }
+    private PhotonView NetworkView;
+
 	
-    IEnumerator Connect()
+    public IEnumerator Connect()
     {
+        NetworkView = gameObject.AddComponent<PhotonView>();
+        NetworkView.synchronization = ViewSynchronization.Off;
+        NetworkView.viewID = 3;
+
         if (Application.internetReachability != NetworkReachability.NotReachable)
             PhotonNetwork.ConnectUsingSettings("1.0");
 
@@ -44,6 +57,8 @@ public class NetworkController : Photon.MonoBehaviour
         PhotonNetwork.NetworkStatisticsEnabled = true;
         //PhotonNetwork.GetRoomList()
     }
+
+    
 
     void OnGUI()
     {
@@ -86,5 +101,17 @@ public class NetworkController : Photon.MonoBehaviour
     {
         UnityEngine.Debug.Log("OnConnectedToMaster");
         connectedToMaster = true;
+    }
+
+    public void SendPhotoMessage(string photoName)
+    {
+        NetworkView.RPC("PhotoMessageReceived", PhotonTargets.Others, photoName);
+    }
+
+    [PunRPC]
+    public void PhotoMessageReceived(string photoName)
+    {
+        UnityEngine.Debug.LogError("PhotoMessageReceived: " + photoName);
+        OnPhotoReceived(photoName);
     }
 }
