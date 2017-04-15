@@ -28,6 +28,7 @@ public class ContactsList : MonoBehaviour
         GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
         GameObject Test = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage0 = Test.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        testImage0.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Emma");
 
         Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -47,7 +48,7 @@ public class ContactsList : MonoBehaviour
 
         GameObject Test1 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage1 = Test1.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        testImage1.sprite = Resources.Load<Sprite>("Textures/picture0");
+        testImage1.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Angel");
 
         Test1.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -64,7 +65,7 @@ public class ContactsList : MonoBehaviour
 
         GameObject Test2 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage2 = Test2.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        testImage2.sprite = Resources.Load<Sprite>("Textures/picture2");
+        testImage2.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Cristina");
 
         Test2.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -81,7 +82,7 @@ public class ContactsList : MonoBehaviour
 
         GameObject Test3 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage3 = Test3.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        testImage3.sprite = Resources.Load<Sprite>("Textures/picture3");
+        testImage3.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/David");
 
         Test3.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
@@ -99,7 +100,7 @@ public class ContactsList : MonoBehaviour
 
         GameObject Test4 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage4 = Test4.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        testImage4.sprite = Resources.Load<Sprite>("Textures/picture3");
+        testImage4.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Edwin");
 
         Test4.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
 
