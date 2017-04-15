@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ public class Popsicle : MonoBehaviour
 {
     Button ButtonComponent;
     RectTransform View;
-    bool ViewIsVisible = false;
+    public bool ViewIsVisible = true;
 
     IEnumerator IEShowScrollView;
 
@@ -20,7 +20,7 @@ public class Popsicle : MonoBehaviour
 
     // Show is at y = 0
     // Hidden is at y = -406
-    protected void ShowScrollView()
+    public void ShowScrollView()
     {
         SoundManager.GetInstance().PlaySingle("SoundFX/digi_plink");
 
@@ -38,7 +38,7 @@ public class Popsicle : MonoBehaviour
     {
         int y = 0;
 
-        if (!ViewIsVisible)
+        if (ViewIsVisible)
         {
             y = -406;
         }
