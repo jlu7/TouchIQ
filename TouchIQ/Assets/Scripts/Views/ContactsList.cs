@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,9 @@ public class ContactsList : MonoBehaviour
 	private void Start ()
     {
         MainPanel = this.GetComponent<RectTransform>().Find("Panel").GetComponent<RectTransform>();
+
+        GameObject prefab4 = Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle");
+        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, MainPanel.GetComponent<RectTransform>());
 
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial");
         MiddleDial = UICreate.InstantiateRectTransformPrefab(prefab, MainPanel.GetComponent<RectTransform>());
@@ -32,13 +35,16 @@ public class ContactsList : MonoBehaviour
         Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
         Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
-        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -20);
-        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 20);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -180);
+        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 180);
         Test.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite);
         });
+
+        //StartCoroutine(rotateIn(Vector3.forward * 20, Test.GetComponent<RectTransform>(), 2f));
+
 
         GameObject Test1 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage1 = Test1.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
@@ -90,9 +96,6 @@ public class ContactsList : MonoBehaviour
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
         });
-
-        GameObject prefab4 = Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle");
-        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, MainPanel.GetComponent<RectTransform>());
 
         RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
     }
