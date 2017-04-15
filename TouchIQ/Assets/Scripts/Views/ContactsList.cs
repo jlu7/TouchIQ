@@ -11,10 +11,9 @@ public class ContactsList : MonoBehaviour
 
 	private void Start ()
     {
-        MainPanel = this.GetComponent<RectTransform>().Find("Panel").GetComponent<RectTransform>();
+        MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
 
-        GameObject prefab4 = Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle");
-        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(prefab4, MainPanel.GetComponent<RectTransform>());
+        GameObject popsicle = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle"), MainPanel.GetComponent<RectTransform>());
 
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial");
         MiddleDial = UICreate.InstantiateRectTransformPrefab(prefab, MainPanel.GetComponent<RectTransform>());
@@ -35,8 +34,8 @@ public class ContactsList : MonoBehaviour
         Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
         Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
-        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -180);
-        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 180);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -0);
+        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
         Test.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
@@ -55,8 +54,8 @@ public class ContactsList : MonoBehaviour
         Test1.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test1.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
         Test1.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
-        Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 20);
-        Test1.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -20);
+        Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -25);
+        Test1.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 25);
         Test1.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
@@ -72,8 +71,8 @@ public class ContactsList : MonoBehaviour
         Test2.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test2.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
         Test2.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
-        Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -60);
-        Test2.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 60);
+        Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -50);
+        Test2.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 50);
         Test2.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
@@ -89,13 +88,32 @@ public class ContactsList : MonoBehaviour
         Test3.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test3.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
         Test3.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
-        Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 60);
-        Test3.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -60);
+        Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 50);
+        Test3.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -50);
         Test3.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
         });
+
+
+        GameObject Test4 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
+        Image testImage4 = Test4.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        testImage4.sprite = Resources.Load<Sprite>("Textures/picture3");
+
+        Test4.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
+
+        Test4.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        Test4.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
+        Test4.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test4.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 25);
+        Test4.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -25);
+        Test4.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
+            RotateArrow(Test4.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage4.sprite);
+        });
+
 
         RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
     }
