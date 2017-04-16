@@ -16,6 +16,7 @@ public class AppStartup : MonoBehaviour
     IEnumerator Startup()
     {
         StartCoroutine(NetworkController.GetInstance().Connect());
+        SpeechController.GetInstance().Initialize();
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
         yield return null;

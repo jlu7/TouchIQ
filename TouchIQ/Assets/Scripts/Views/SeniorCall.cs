@@ -47,6 +47,11 @@ public class SeniorCall : MonoBehaviour {
     void OnVideoStart()
     {
         //remoteUserPanel.SetActive(false);
+        if (Application.platform != RuntimePlatform.Android)
+        {
+            calleeCanvas.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 90));
+            calleeCanvas.GetComponent<RectTransform>().localScale = new Vector3(1.5f, .75f, 1);
+        }
     }
 
     private void ReceivedNetworkPhoto(string photoName)
@@ -139,6 +144,8 @@ public class SeniorCall : MonoBehaviour {
     void Update()
     {
         if (null != VideoChat.networkTexture)
+        {
             calleeCanvas.SetTexture(VideoChat.networkTexture);
+        }
     }
 }

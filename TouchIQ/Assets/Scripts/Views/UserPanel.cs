@@ -18,6 +18,12 @@ public class UserPanel : MonoBehaviour
         ScrollView = this.transform.Find("Mask/ScrollView").GetComponent<RectTransform>();
         ButtonComponent.onClick.AddListener(ShowScrollView);
         LocalViewCanvas = transform.Find("BG/User").GetComponent<CanvasRenderer>();
+
+        VideoChat.localView = true;
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            LocalViewCanvas.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 90));
+        }
     }
 
     // Show is at y = 110
@@ -60,7 +66,7 @@ public class UserPanel : MonoBehaviour
 
     void Update()
     {
-        VideoChat.localView = true;
+        
         if (null != VideoChat.localViewTexture)
             LocalViewCanvas.SetTexture(VideoChat.localViewTexture);
     }
