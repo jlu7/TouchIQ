@@ -21,6 +21,7 @@ public class AppStartup : MonoBehaviour
         yield return null;
         StartCoroutine(NetworkController.GetInstance().Connect());
         SpeechController.GetInstance().Initialize();
+        PhotoController.GetInstance().Initialize();
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
     }

@@ -16,13 +16,35 @@ public class PhotoController : MonoBehaviour {
         return photoController;
     }
 
+    public delegate void ActiveSetChanged(PhotoSet activeSet);
+    public event ActiveSetChanged OnActiveSetChanged;
+
+    public PhotoSet ActiveSet = null;
+
+    private PhotoLibrary photoLibrary;
+
     public void Initialize()
     {
         SpeechController.GetInstance().OnContextSpeechDetected += OnPhotoContextWord;
+        photoLibrary = Instantiate<GameObject>(Resources.Load<GameObject>("prefabs/PhotoLibrary")).GetComponent<PhotoLibrary>();
+        ActiveSet = photoLibrary.PhotoSets[0];
     }
 
     private void OnPhotoContextWord(List<string> contextWords)
     {
-        throw new NotImplementedException();
+        bool setChanged = false;
+        foreach(PhotoSet set in photoLibrary.PhotoSets)
+        {
+            if(set.Name.ToLower() == contextWords[0])
+            {
+                ActiveSet = set;
+                setChanged = true;
+                break;
+            }
+        }
+        if(null != OnActiveSetChanged && setChanged)
+        {
+            OnActiveSetChanged(ActiveSet);
+        }
     }
 }

@@ -24,6 +24,8 @@ public class UserPanel : MonoBehaviour
         {
             LocalViewCanvas.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 90));
         }
+
+        PhotoController.GetInstance().OnActiveSetChanged += ForceOpenScrollView;
     }
 
     // Show is at y = 110
@@ -62,6 +64,14 @@ public class UserPanel : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void ForceOpenScrollView(PhotoSet set)
+    {
+        if (ScrollViewIsVisible)
+        {
+            ShowScrollView();
+        }
     }
 
     void Update()

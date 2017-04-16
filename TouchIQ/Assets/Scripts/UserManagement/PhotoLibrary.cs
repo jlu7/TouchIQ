@@ -17,6 +17,6 @@ public class PhotoLibrary : MonoBehaviour {
 public class PhotoSet
 {
     public string Name;
-    public Texture2D[] Photos;
+    public Sprite[] Photos;
 
 }

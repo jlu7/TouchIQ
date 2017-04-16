@@ -87,7 +87,7 @@ public class SpeechController : MonoBehaviour
                     contextWordsDetected.Add(contextWord);
                 }
             }
-            if(contextWordsDetected.Count < 0 && null != OnContextSpeechDetected)
+            if(contextWordsDetected.Count > 0 && null != OnContextSpeechDetected)
             {
                 OnContextSpeechDetected(contextWordsDetected);
             }
