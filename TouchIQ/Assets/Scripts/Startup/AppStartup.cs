@@ -15,12 +15,13 @@ public class AppStartup : MonoBehaviour
 
     IEnumerator Startup()
     {
+
+        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
+        SoundManager.GetInstance();
+        yield return null;
         StartCoroutine(NetworkController.GetInstance().Connect());
         SpeechController.GetInstance().Initialize();
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
-        yield return null;
-        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
-        SoundManager.GetInstance();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -75,6 +75,7 @@ public class NetworkController : Photon.MonoBehaviour
     {
         UnityEngine.Debug.Log("OnJoinedLobby");
     }
+
     void OnReceivedRoomListUpdate()
     {
         UnityEngine.Debug.Log("OnReceivedRoomListUpdate: " + PhotonNetwork.GetRoomList().Length);
@@ -82,7 +83,7 @@ public class NetworkController : Photon.MonoBehaviour
         {
             if (ViewController.GetInstance().CurrentView.name.Contains("Contact"))
             {
-                ViewController.GetInstance().CreateView("Prefabs/SeniorCall/IncomingCallScreen");
+                StartCoroutine(ViewController.GetInstance().CurrentView.GetComponent<ContactsList>().IncomingCall());
             }
         }
     }

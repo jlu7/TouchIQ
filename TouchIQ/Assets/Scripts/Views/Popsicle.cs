@@ -12,7 +12,7 @@ public class Popsicle : MonoBehaviour
 
     IEnumerator IEShowScrollView;
 
-    void Start()
+    void Awake()
     {
         ButtonComponent = this.transform.Find("Tab").GetComponent<Button>();
         //ButtonComponent.onClick.AddListener(ShowScrollView);

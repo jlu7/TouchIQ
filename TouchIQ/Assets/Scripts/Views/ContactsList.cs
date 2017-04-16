@@ -19,7 +19,7 @@ public class ContactsList : MonoBehaviour
     Popsicle _Popsicle;
     List<GameObject> BubbleList;
 
-	private void Start ()
+	private void Awake ()
     {
         MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
         BubbleList = new List<GameObject>();
@@ -191,6 +191,33 @@ public class ContactsList : MonoBehaviour
         }
     }
 
+    public IEnumerator IncomingCall()
+    {
+        if (_Popsicle.ViewIsVisible)
+        {
+            _Popsicle.ShowScrollView();
+        }
+        Image Arrow = MiddleDial.transform.Find("ArrowOrigin/Arrow").GetComponent<Image>();
+
+        float timeToReachTarget = 2f;
+
+        var t = 0f;
+
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToReachTarget;
+            MiddleDial.transform.localScale = Vector3.Lerp(MiddleDial.transform.localScale, new Vector3(1.75f, 1.75f), t);
+            Arrow.color = Color.Lerp(Arrow.color, Color.clear, t);
+            foreach (GameObject bubble in BubbleList)
+            {
+                bubble.transform.Find("Circle").localPosition = Vector3.Lerp(bubble.transform.Find("Circle").localPosition, new Vector3(0, 0, 0), t);
+            }
+            yield return null;
+        }
+
+        ViewController.GetInstance().CreateView("Prefabs/SeniorCall/IncomingCallScreen");
+    }
+
     private IEnumerator TransitionToCall()
     {
         if (_Popsicle.ViewIsVisible)
@@ -207,6 +234,7 @@ public class ContactsList : MonoBehaviour
         {
             t += Time.deltaTime / timeToReachTarget;
 
+            MiddleDial.transform.localScale = Vector3.Lerp(MiddleDial.transform.localScale, new Vector3(1.75f, 1.75f), t);
             Arrow.color = Color.Lerp(Arrow.color, Color.clear, t);
             foreach (GameObject bubble in BubbleList)
             {
