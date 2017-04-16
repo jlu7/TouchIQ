@@ -29,6 +29,7 @@ public class ContactsList : MonoBehaviour
 
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial");
         MiddleDial = UICreate.InstantiateRectTransformPrefab(prefab, MainPanel.GetComponent<RectTransform>());
+        MiddleDial.GetComponent<RectTransform>().localScale = new Vector3(1.75f, 1.75f, 1);
 
         Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
         callButton.onClick.AddListener(() => 
@@ -48,7 +49,7 @@ public class ContactsList : MonoBehaviour
 
         Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -0);
         Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
         Test.GetComponent<Button>().onClick.AddListener(() =>
@@ -70,7 +71,7 @@ public class ContactsList : MonoBehaviour
 
         Test1.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test1.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test1.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test1.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -25);
         Test1.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 25);
         Test1.GetComponent<Button>().onClick.AddListener(() =>
@@ -89,7 +90,7 @@ public class ContactsList : MonoBehaviour
 
         Test2.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test2.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test2.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test2.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -50);
         Test2.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 50);
         Test2.GetComponent<Button>().onClick.AddListener(() =>
@@ -108,7 +109,7 @@ public class ContactsList : MonoBehaviour
 
         Test3.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test3.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test3.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test3.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 50);
         Test3.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -50);
         Test3.GetComponent<Button>().onClick.AddListener(() =>
@@ -128,7 +129,7 @@ public class ContactsList : MonoBehaviour
 
         Test4.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         Test4.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test4.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 600);
+        Test4.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test4.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 25);
         Test4.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -25);
         Test4.GetComponent<Button>().onClick.AddListener(() =>
@@ -144,6 +145,7 @@ public class ContactsList : MonoBehaviour
         ContactList.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
         ContactList.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         ContactList.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
+        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         ContactList.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
         ContactList.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
 
@@ -154,10 +156,16 @@ public class ContactsList : MonoBehaviour
         ContactAdd.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
         ContactAdd.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         ContactAdd.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
+        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
         ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
 
         RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(EnterAnimation());
     }
 
     private IEnumerator coRotateArrowIE = null;
@@ -220,15 +228,13 @@ public class ContactsList : MonoBehaviour
 
     private IEnumerator TransitionToCall()
     {
-        if (_Popsicle.ViewIsVisible)
-        {
-            _Popsicle.ShowScrollView();
-        }
+        _Popsicle.HideScrollView();
+
         Image Arrow = MiddleDial.transform.Find("ArrowOrigin/Arrow").GetComponent<Image>();
 
         float timeToReachTarget = 2f;
 
-        var t = 0f;
+        float t = 0f;
 
         while (t < 1)
         {
@@ -243,6 +249,41 @@ public class ContactsList : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(5f);
+
         ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
+    }
+
+    private IEnumerator EnterAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        _Popsicle.ShowScrollView();
+        Image Arrow = MiddleDial.transform.Find("ArrowOrigin/Arrow").GetComponent<Image>();
+        Image CallButton = MiddleDial.transform.Find("CallButton").GetComponent<Image>();
+
+        float timeToReachTarget = 2f;
+
+        float t = 0f;
+
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToReachTarget;
+
+            MiddleDial.transform.localScale = Vector3.Lerp(MiddleDial.transform.localScale, new Vector3(1f, 1f), t);
+            Arrow.color = Color.Lerp(Arrow.color, Color.white, t);
+            CallButton.color = Color.Lerp(CallButton.color, Color.white, t);
+            foreach (GameObject bubble in BubbleList)
+            {
+                if (bubble.name == "Bubble(Clone)")
+                {
+                    bubble.transform.Find("Circle").localPosition = Vector3.Lerp(bubble.transform.Find("Circle").localPosition, new Vector3(0, 600, 0), t);
+                }
+                else
+                {
+                    bubble.transform.Find("Circle").localPosition = Vector3.Lerp(bubble.transform.Find("Circle").localPosition, new Vector3(0, 260, 0), t);
+                }
+            }
+            yield return null;
+        }
     }
 }

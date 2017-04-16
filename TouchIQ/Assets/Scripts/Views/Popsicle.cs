@@ -7,10 +7,10 @@ public class Popsicle : MonoBehaviour
 {
     Button ButtonComponent;
     RectTransform View;
-    public bool ViewIsVisible = true;
+    public bool ViewIsVisible = false;
     public bool AcceptingInput = true;
 
-    IEnumerator IEShowScrollView;
+    IEnumerator IEScrollView;
 
     void Awake()
     {
@@ -19,6 +19,11 @@ public class Popsicle : MonoBehaviour
         View = this.GetComponent<RectTransform>();
     }
 
+    private void Start()
+    {
+        View.anchoredPosition = new Vector2(View.anchoredPosition.x, -406);
+    }
+    /*
     public void ChangeState(ContactsList.CurrentState State)
     {
         if (State == ContactsList.CurrentState.ContactList)
@@ -51,51 +56,76 @@ public class Popsicle : MonoBehaviour
             transform.Find("Tab/Calling").gameObject.SetActive(true);
         }
     }
-
+    */
     // Show is at y = 0
     // Hidden is at y = -406
     public void ShowScrollView()
     {
-        SoundManager.GetInstance().PlaySingle("SoundFX/digi_plink");
-
-        if (IEShowScrollView != null)
+        if (IEScrollView != null)
         {
-            StopCoroutine(IEShowScrollView);
+            StopCoroutine(IEScrollView);
         }
-        IEShowScrollView = null;
-        IEShowScrollView = coShowScrollView();
+        IEScrollView = null;
+        IEScrollView = coShowScrollView();
 
-        StartCoroutine(IEShowScrollView);
+        StartCoroutine(IEScrollView);
+    }
+
+    public void HideScrollView()
+    {
+        if (IEScrollView != null)
+        {
+            StopCoroutine(IEScrollView);
+        }
+        IEScrollView = null;
+        IEScrollView = coHideScrollView();
+
+        StartCoroutine(IEScrollView);
     }
 
     protected IEnumerator coShowScrollView()
     {
-        if (AcceptingInput)
+        int y = 0;
+
+        transform.Find("Tab/TimeToCall").gameObject.SetActive(true);
+        transform.Find("Tab/LastTalked").gameObject.SetActive(true);
+
+        ViewIsVisible = !ViewIsVisible;
+        Debug.Log("SHOW");
+
+        float speed = 2000;
+        Vector2 target = new Vector2(View.anchoredPosition.x, y);
+        Vector2 NameTarget = new Vector2(0, -4);
+
+        while (View.anchoredPosition.y != y)
         {
-            int y = 0;
+            float step = speed * Time.deltaTime;
+            transform.Find("Tab/Name").localPosition = Vector2.MoveTowards(transform.Find("Tab/Name").localPosition, NameTarget, step);
+            View.anchoredPosition = Vector2.MoveTowards(View.anchoredPosition, target, step);
+            yield return null;
+        }
+    }
 
-            if (ViewIsVisible)
-            {
-                y = -406;
-            }
+    protected IEnumerator coHideScrollView()
+    {
+        int y = -406;
+        transform.Find("Tab/TimeToCall").gameObject.SetActive(false);
+        transform.Find("Tab/LastTalked").gameObject.SetActive(false);
 
-            ViewIsVisible = !ViewIsVisible;
-            Debug.Log(ViewIsVisible);
+        Debug.Log("HIDE");
 
-            float speed = 2000;
-            Vector2 target = new Vector2(View.anchoredPosition.x, y);
-            Vector2 NameTarget = new Vector2(0, 70);
+        ViewIsVisible = !ViewIsVisible;
 
-            transform.Find("Tab/TimeToCall").gameObject.SetActive(false);
-            transform.Find("Tab/LastTalked").gameObject.SetActive(false);
+        float speed = 2000;
+        Vector2 target = new Vector2(View.anchoredPosition.x, y);
+        Vector2 NameTarget = new Vector2(0, 70);
 
-            while (View.anchoredPosition.y != y)
-            {
-                float step = speed * Time.deltaTime;
-                transform.Find("Tab/Name").localPosition = Vector2.MoveTowards(transform.Find("Tab/Name").localPosition, NameTarget, step);
-                View.anchoredPosition = Vector2.MoveTowards(View.anchoredPosition, target, step);
-                yield return null;
-            }
+        while (View.anchoredPosition.y != y)
+        {
+            float step = speed * Time.deltaTime;
+            transform.Find("Tab/Name").localPosition = Vector2.MoveTowards(transform.Find("Tab/Name").localPosition, NameTarget, step);
+            View.anchoredPosition = Vector2.MoveTowards(View.anchoredPosition, target, step);
+            yield return null;
         }
     }
 }
