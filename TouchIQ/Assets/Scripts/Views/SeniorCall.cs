@@ -54,9 +54,9 @@ public class SeniorCall : MonoBehaviour {
         }
     }
 
-    private void ReceivedNetworkPhoto(string photoName)
+    private void ReceivedNetworkPhoto(string setName, string photoName)
     {
-        Sprite spr = Resources.Load<Sprite>("Textures/" + photoName);
+        Sprite spr = PhotoController.GetInstance().GetPhoto(setName, photoName);
         SharedPhotoViewOn(spr);
     }
 
@@ -83,7 +83,7 @@ public class SeniorCall : MonoBehaviour {
             CloseShareScreen();
         });
 
-        NetworkController.GetInstance().SendPhotoMessage(spr.name);
+        NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
 
         /*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
                 Right.onClick.RemoveAllListeners();

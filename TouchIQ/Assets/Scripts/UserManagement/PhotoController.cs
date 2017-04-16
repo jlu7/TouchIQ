@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PhotoController : MonoBehaviour {
 
@@ -28,6 +29,17 @@ public class PhotoController : MonoBehaviour {
         SpeechController.GetInstance().OnContextSpeechDetected += OnPhotoContextWord;
         photoLibrary = Instantiate<GameObject>(Resources.Load<GameObject>("prefabs/PhotoLibrary")).GetComponent<PhotoLibrary>();
         ActiveSet = photoLibrary.PhotoSets[0];
+    }
+
+    public Sprite GetPhoto(string setName, string photoName)
+    {
+        PhotoSet set = photoLibrary.PhotoSets.FirstOrDefault(x => x.Name.ToLower() == setName.ToLower());
+        if(null != set)
+        {
+            return set.Photos.FirstOrDefault(y => y.name.ToLower() == photoName.ToLower());
+        }
+
+        return null;
     }
 
     private void OnPhotoContextWord(List<string> contextWords)

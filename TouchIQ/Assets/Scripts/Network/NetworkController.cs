@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +15,8 @@ public class NetworkController : Photon.MonoBehaviour
         }
         return networkController;
     }
-    public delegate void PhotoReceived(string photoName);
-    public event PhotoReceived OnPhotoReceived = (string photoName) => { };
+    public delegate void PhotoReceived(string setName, string photoName);
+    public event PhotoReceived OnPhotoReceived = (string setName, string photoName) => { };
 
     private bool connectedToMaster = false;
 
@@ -104,15 +104,16 @@ public class NetworkController : Photon.MonoBehaviour
         connectedToMaster = true;
     }
 
-    public void SendPhotoMessage(string photoName)
+    public void SendPhotoMessage(string setName, string photoName)
     {
-        NetworkView.RPC("PhotoMessageReceived", PhotonTargets.Others, photoName);
+        UnityEngine.Debug.LogWarning("Sent Photo: " + setName + " , " + photoName);
+        NetworkView.RPC("PhotoMessageReceived", PhotonTargets.Others, setName, photoName);
     }
 
     [PunRPC]
-    public void PhotoMessageReceived(string photoName)
+    public void PhotoMessageReceived(string setName, string photoName)
     {
-        UnityEngine.Debug.LogError("PhotoMessageReceived: " + photoName);
-        OnPhotoReceived(photoName);
+        UnityEngine.Debug.LogWarning("PhotoMessageReceived: " + photoName);
+        OnPhotoReceived(setName, photoName);
     }
 }
