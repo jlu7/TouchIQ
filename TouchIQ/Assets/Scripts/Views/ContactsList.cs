@@ -249,7 +249,7 @@ public class ContactsList : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
         ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
     }
