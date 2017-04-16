@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +12,7 @@ public class IncomingCall : MonoBehaviour
     {
         SoundManager.GetInstance().PlaySingle("SoundFX/Ringing_Phone", true);
 
-        acceptButton = this.transform.Find("Panel/AcceptButton").GetComponent<Button>();
+        acceptButton = this.transform.Find("Panel/BottomBar2/AcceptCall").GetComponent<Button>();
         acceptButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().StopAllLoopingSoundEffects();
@@ -20,7 +20,7 @@ public class IncomingCall : MonoBehaviour
             ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
         });
 
-        declineButton = this.transform.Find("Panel/DeclineButton").GetComponent<Button>();
+        declineButton = this.transform.Find("Panel/BottomBar2/EndCall").GetComponent<Button>();
         declineButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().StopAllLoopingSoundEffects();

@@ -5,7 +5,15 @@ using UnityEngine.UI;
 
 public class ContactsList : MonoBehaviour
 {
+    public enum CurrentState
+    {
+        ContactList,
+        Calling,
+        InCall
+    }
+
     RectTransform MainPanel = null;
+    CurrentState _State = CurrentState.ContactList;
 
     GameObject MiddleDial;
     Popsicle _Popsicle;
@@ -26,7 +34,6 @@ public class ContactsList : MonoBehaviour
         callButton.onClick.AddListener(() => 
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
-            //ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
             StartCoroutine(TransitionToCall());
         });
 
@@ -207,5 +214,7 @@ public class ContactsList : MonoBehaviour
             }
             yield return null;
         }
+
+        ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
     }
 }

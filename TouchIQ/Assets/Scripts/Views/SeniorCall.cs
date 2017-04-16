@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +21,7 @@ public class SeniorCall : MonoBehaviour {
         calleeCanvas = remoteUserPanel.transform.Find("Callee").GetComponent<CanvasRenderer>();
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
-        endCall = transform.Find("BottomBar/CallButton").GetComponent<Button>();
+        endCall = transform.Find("BottomBar/InCall/EndCall").GetComponent<Button>();
         endCall.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
