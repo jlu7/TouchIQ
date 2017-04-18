@@ -82,8 +82,11 @@ public class SeniorCall : MonoBehaviour {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             CloseShareScreen();
         });
-
-        NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
+        if(null != PhotoController.GetInstance().ActiveSet && null != spr)
+        {
+            NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
+        }
+        
 
         /*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
                 Right.onClick.RemoveAllListeners();
