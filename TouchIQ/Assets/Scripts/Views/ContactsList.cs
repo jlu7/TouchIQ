@@ -18,9 +18,13 @@ public class ContactsList : MonoBehaviour
     GameObject MiddleDial;
     Popsicle _Popsicle;
     List<GameObject> BubbleList;
+    ContactsUsersModel model;
 
-	private void Awake ()
+
+    private void Awake ()
     {
+        LoadData();
+
         MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
         BubbleList = new List<GameObject>();
 
@@ -55,7 +59,7 @@ public class ContactsList : MonoBehaviour
         Test.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite);
+            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
         });
 
         //StartCoroutine(rotateIn(Vector3.forward * 20, Test.GetComponent<RectTransform>(), 2f));
@@ -77,7 +81,7 @@ public class ContactsList : MonoBehaviour
         Test1.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage1.sprite);
+            RotateArrow(Test1.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage1.sprite, Test1.GetComponent<ContactTag>().TagData);
         });
 
         GameObject Test2 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
@@ -96,7 +100,7 @@ public class ContactsList : MonoBehaviour
         Test2.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage2.sprite);
+            RotateArrow(Test2.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage2.sprite, Test2.GetComponent<ContactTag>().TagData);
         });
 
         GameObject Test3 = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
@@ -115,7 +119,7 @@ public class ContactsList : MonoBehaviour
         Test3.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
+            RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite, Test3.GetComponent<ContactTag>().TagData);
         });
 
 
@@ -135,7 +139,7 @@ public class ContactsList : MonoBehaviour
         Test4.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test4.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage4.sprite);
+            RotateArrow(Test4.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage4.sprite, Test4.GetComponent<ContactTag>().TagData);
         });
 
         GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
@@ -160,29 +164,52 @@ public class ContactsList : MonoBehaviour
         ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
         ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
 
-        RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite);
+        RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite, 2);
+
+        FillWithData();
     }
 
     private void Start()
     {
+        
         StartCoroutine(EnterAnimation());
+    }
+
+    void LoadData()
+    {
+        model = UserDataController.GetInstance().ContactsUsers;
+        
+    }
+
+    void FillWithData()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject contactObject = BubbleList[i];
+            ContactModel contactModel = model.Caregiver.Contacts[i];
+
+            contactObject.AddComponent<ContactTag>().TagData = i;
+
+            Image img = contactObject.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+            img.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + contactModel.Image);
+        }
     }
 
     private IEnumerator coRotateArrowIE = null;
 
-    private void RotateArrow(Quaternion rotateTo, Sprite image)
+    private void RotateArrow(Quaternion rotateTo, Sprite image, int tagData)
     {
         if (coRotateArrowIE != null)
         {
             StopCoroutine(coRotateArrowIE);
         }
         coRotateArrowIE = null;
-        coRotateArrowIE = coRotateArrow(rotateTo, image);
+        coRotateArrowIE = coRotateArrow(rotateTo, image, tagData);
 
         StartCoroutine(coRotateArrowIE);
     }
 
-    private IEnumerator coRotateArrow(Quaternion rotateTo, Sprite image)
+    private IEnumerator coRotateArrow(Quaternion rotateTo, Sprite image, int tagData)
     {
         MiddleDial.transform.Find("ImageMask/Image").GetComponent<Image>().sprite = image;
 
@@ -197,6 +224,7 @@ public class ContactsList : MonoBehaviour
                 new Quaternion(rotateTo.x, rotateTo.y, -rotateTo.z, rotateTo.w), step);
             yield return null;
         }
+        _Popsicle.SetUserPopsicleInfo(model.Caregiver.Contacts[tagData]);
     }
 
     public IEnumerator IncomingCall()
@@ -286,4 +314,9 @@ public class ContactsList : MonoBehaviour
             yield return null;
         }
     }
+}
+
+public class ContactTag : MonoBehaviour
+{
+    public int TagData;
 }

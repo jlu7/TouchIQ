@@ -38,10 +38,10 @@ public class Popsicle : MonoBehaviour
         TimeToCallText.text = "DURR";
         LastTalkedText = this.transform.Find("Tab/LastTalked").GetComponent<Text>();
         LastTalkedText.text = "DURR";
-        RequestedOfMeText = this.transform.Find("Requests/RequestedOfMe/RequestedOfMeBG/RequestedOfMeText").GetComponent<Text>();
-        RequestedOfMeText.text = "DURR";
-        RequestedOfOthersText = this.transform.Find("Requests/RequestedOfOthers/RequestedOfOthersBG/RequestedOfMeText").GetComponent<Text>();
-        RequestedOfOthersText.text = "DURR";
+        //RequestedOfMeText = this.transform.Find("Requests/RequestedOfMe/RequestedOfMeBG/RequestedOfMeText").GetComponent<Text>();
+        //RequestedOfMeText.text = "DURR";
+        //RequestedOfOthersText = this.transform.Find("Requests/RequestedOfOthers/RequestedOfOthersBG/RequestedOfMeText").GetComponent<Text>();
+        //RequestedOfOthersText.text = "DURR";
 
         requestedOfMeItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfMeItem");
         requestedOfOthersItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfOthersItem");
@@ -114,6 +114,38 @@ public class Popsicle : MonoBehaviour
         }
     }
     */
+
+    public void SetUserPopsicleInfo(ContactModel contactModel)
+    {
+        NameText.text = contactModel.Name;
+        TimeToCallText.text = contactModel.TimeToCall;
+        LastTalkedText.text = contactModel.LastTalked;
+
+        List<LayoutElement> les = RequestedOfMeScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+        foreach (LayoutElement le in les)
+        {
+            Destroy(le.gameObject);
+        }
+        foreach(string req in contactModel.RequestedOfMe)
+        {
+            GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfMeScroll.content.transform);
+            go.GetComponent<RectTransform>().localScale = Vector3.one;
+            go.transform.Find("Text").GetComponent<Text>().text = req;
+        }
+
+        les = RequestedOfOthersScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+        foreach (LayoutElement le in les)
+        {
+            Destroy(le.gameObject);
+        }
+        foreach (string req in contactModel.RequestedOfOthers)
+        {
+            GameObject go = GameObject.Instantiate<GameObject>(requestedOfOthersItemPrefab, RequestedOfOthersScroll.content.transform);
+            go.GetComponent<RectTransform>().localScale = Vector3.one;
+            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+        }
+    }
+
     // Show is at y = 0
     // Hidden is at y = -406
     public void ShowScrollView()

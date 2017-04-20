@@ -15,7 +15,7 @@ public class AppStartup : MonoBehaviour
 
     IEnumerator Startup()
     {
-
+        UserDataController.GetInstance().Initialize();
         ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
         SoundManager.GetInstance();
         yield return null;
