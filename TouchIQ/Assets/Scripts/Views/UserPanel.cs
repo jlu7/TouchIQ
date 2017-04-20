@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +14,10 @@ public class UserPanel : MonoBehaviour
 
     void Start()
     {
-        ButtonComponent = transform.Find("BG").GetComponent<Button>();
+        ButtonComponent = transform.Find("Mask/Mask/BG").GetComponent<Button>();
         ScrollView = this.transform.Find("Mask/ScrollView").GetComponent<RectTransform>();
         ButtonComponent.onClick.AddListener(ShowScrollView);
-        LocalViewCanvas = transform.Find("BG/User").GetComponent<CanvasRenderer>();
+        LocalViewCanvas = transform.Find("Mask/Mask/BG").GetComponent<CanvasRenderer>();
 
         VideoChat.localView = true;
         if(Application.platform == RuntimePlatform.Android)
@@ -45,7 +45,7 @@ public class UserPanel : MonoBehaviour
 
     public IEnumerator coShowScrollView()
     {
-        int y = 110;
+        int y = -210;
 
         if (!ScrollViewIsVisible)
         {

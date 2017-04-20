@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +36,15 @@ public class PictureSelector : MonoBehaviour {
             //Resources.Load<Sprite>("Textures/picture" + (i + 1).ToString());
             //go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/picture" + (i).ToString());
             go.GetComponent<Image>().sprite = image;
+            Vector2 sides = go.GetComponent<Image>().sprite.rect.size;
+
+            float x = sides.x;
+            float y = sides.y;
+
+            Debug.Log(y / x * 160);
+
+
+            go.GetComponent<RectTransform>().sizeDelta = new Vector2(160, (y/x) * 160);
         }
     }
 
