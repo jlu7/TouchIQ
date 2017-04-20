@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,18 @@ public class Popsicle : MonoBehaviour
     public bool ViewIsVisible = false;
     public bool AcceptingInput = true;
 
+    Text NameText;
+    Text TimeToCallText;
+    Text LastTalkedText;
+    Text RequestedOfMeText;
+    Text RequestedOfOthersText;
+
+    ScrollRect RequestedOfMeScroll;
+    ScrollRect RequestedOfOthersScroll;
+
+    GameObject requestedOfMeItemPrefab;
+    GameObject requestedOfOthersItemPrefab;
+
     IEnumerator IEScrollView;
 
     void Awake()
@@ -17,6 +30,50 @@ public class Popsicle : MonoBehaviour
         ButtonComponent = this.transform.Find("Tab").GetComponent<Button>();
         //ButtonComponent.onClick.AddListener(ShowScrollView);
         View = this.GetComponent<RectTransform>();
+
+        //Grab refs too all of the custom Text
+        NameText = this.transform.Find("Tab/Name").GetComponent<Text>();
+        NameText.text = "\nDURR";
+        TimeToCallText = this.transform.Find("Tab/TimeToCall").GetComponent<Text>();
+        TimeToCallText.text = "DURR";
+        LastTalkedText = this.transform.Find("Tab/LastTalked").GetComponent<Text>();
+        LastTalkedText.text = "DURR";
+        RequestedOfMeText = this.transform.Find("Requests/RequestedOfMe/RequestedOfMeBG/RequestedOfMeText").GetComponent<Text>();
+        RequestedOfMeText.text = "DURR";
+        RequestedOfOthersText = this.transform.Find("Requests/RequestedOfOthers/RequestedOfOthersBG/RequestedOfMeText").GetComponent<Text>();
+        RequestedOfOthersText.text = "DURR";
+
+        requestedOfMeItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfMeItem");
+        requestedOfOthersItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfOthersItem");
+
+        RequestedOfMeScroll = this.transform.Find("Requests/RequestedOfMe/Scroll View").GetComponent<ScrollRect>();
+        RequestedOfOthersScroll = this.transform.Find("Requests/RequestedOfOthers/Scroll View").GetComponent<ScrollRect>();
+
+        List<LayoutElement> les = RequestedOfMeScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+        foreach(LayoutElement le in les)
+        {
+            Destroy(le.gameObject);
+        }
+        for (int j = 0; j < 5; j++)
+        {
+            GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfMeScroll.content.transform);
+            go.GetComponent<RectTransform>().localScale = Vector3.one;
+            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+        }
+
+        les = RequestedOfOthersScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+        foreach (LayoutElement le in les)
+        {
+            Destroy(le.gameObject);
+        }
+        for (int j = 0; j < 5; j++)
+        {
+            GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfOthersScroll.content.transform);
+            go.GetComponent<RectTransform>().localScale = Vector3.one;
+            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+        }
+
+
     }
 
     private void Start()
