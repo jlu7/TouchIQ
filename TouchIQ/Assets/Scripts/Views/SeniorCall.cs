@@ -9,7 +9,8 @@ public class SeniorCall : MonoBehaviour {
     CanvasRenderer calleeCanvas;
     GameObject localUserPanel;
     UserPanel UserPanelRef;
-
+    RectTransform CalleeCanvasZoom;
+    Vector2 CalleeOriginalSize;
     GameObject videoCall;
 
     Button endCall;
@@ -18,7 +19,10 @@ public class SeniorCall : MonoBehaviour {
     void Start ()
     {
         remoteUserPanel = transform.Find("Panel").gameObject;
-        calleeCanvas = remoteUserPanel.transform.Find("Callee").GetComponent<CanvasRenderer>();
+        CalleeCanvasZoom = remoteUserPanel.transform.Find("Mask").GetComponent<RectTransform>();
+        calleeCanvas = remoteUserPanel.transform.Find("Mask/VideoCallee").GetComponent<CanvasRenderer>();
+        CalleeOriginalSize = remoteUserPanel.transform.Find("Mask/VideoCallee").GetComponent<RectTransform>().sizeDelta;
+
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
         endCall = transform.Find("BottomBar/InCall/EndCall").GetComponent<Button>();
@@ -50,7 +54,7 @@ public class SeniorCall : MonoBehaviour {
         if (Application.platform != RuntimePlatform.Android)
         {
             calleeCanvas.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 90));
-            calleeCanvas.GetComponent<RectTransform>().localScale = new Vector3(1.5f, .75f, 1);
+            calleeCanvas.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
         }
     }
 
@@ -62,6 +66,7 @@ public class SeniorCall : MonoBehaviour {
 
     private void SharedPhotoViewOn(Sprite spr)
     {
+        ShrinkVideo();
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
@@ -80,6 +85,7 @@ public class SeniorCall : MonoBehaviour {
         closeButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
+            ShrinkVideo();
             CloseShareScreen();
         });
         if(null != PhotoController.GetInstance().ActiveSet && null != spr)
@@ -144,11 +150,53 @@ public class SeniorCall : MonoBehaviour {
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(true);
     }
 
+    IEnumerator IEShrinkVideo;
+    bool VideoFullScreen = true;
+
+    public void ShrinkVideo()
+    {
+        if (IEShrinkVideo != null)
+        {
+            StopCoroutine(IEShrinkVideo);
+        }
+        IEShrinkVideo = null;
+        IEShrinkVideo = coShrinkVideo();
+
+        StartCoroutine(IEShrinkVideo);
+    }
+
+    public IEnumerator coShrinkVideo()
+    {
+        Vector2 moveTo = new Vector2(50, -50);
+        Vector2 scaleTo = new Vector2(175, 200);
+        Vector2 bgScaleTo = new Vector3(.25f, .25f);
+        if (!VideoFullScreen)
+        {
+            moveTo = new Vector2(0, 0);
+            scaleTo = new Vector2(710, 1136);
+        }
+
+        VideoFullScreen = !VideoFullScreen;
+
+        float speed = 10;
+
+        while (CalleeCanvasZoom.anchoredPosition != moveTo)
+        {
+            float step = speed * Time.deltaTime;
+            CalleeCanvasZoom.anchoredPosition = Vector2.Lerp(CalleeCanvasZoom.anchoredPosition, moveTo, step);
+            CalleeCanvasZoom.sizeDelta = Vector2.Lerp(CalleeCanvasZoom.sizeDelta, scaleTo, step);
+            calleeCanvas.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(CalleeCanvasZoom.sizeDelta, scaleTo, step);
+            yield return null;
+        }
+
+    }
+
     void Update()
     {
         if (null != VideoChat.networkTexture)
         {
             calleeCanvas.SetTexture(VideoChat.networkTexture);
+            CalleeCanvasZoom.transform.Find("Callee").gameObject.SetActive(false);
         }
     }
 }
