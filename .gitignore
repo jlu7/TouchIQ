@@ -51,3 +51,4 @@ backend/*.sqlite3
 .Trashes
 ehthumbs.db
 Thumbs.db
+TouchIQ/builds/
