@@ -33,11 +33,11 @@ public class Popsicle : MonoBehaviour
 
         //Grab refs too all of the custom Text
         NameText = this.transform.Find("Tab/Name").GetComponent<Text>();
-        NameText.text = "\nDURR";
+        NameText.text = "";
         TimeToCallText = this.transform.Find("Tab/TimeToCall").GetComponent<Text>();
-        TimeToCallText.text = "DURR";
+        TimeToCallText.text = "";
         LastTalkedText = this.transform.Find("Tab/LastTalked").GetComponent<Text>();
-        LastTalkedText.text = "DURR";
+        LastTalkedText.text = "";
         //RequestedOfMeText = this.transform.Find("Requests/RequestedOfMe/RequestedOfMeBG/RequestedOfMeText").GetComponent<Text>();
         //RequestedOfMeText.text = "DURR";
         //RequestedOfOthersText = this.transform.Find("Requests/RequestedOfOthers/RequestedOfOthersBG/RequestedOfMeText").GetComponent<Text>();
@@ -58,7 +58,7 @@ public class Popsicle : MonoBehaviour
         {
             GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfMeScroll.content.transform);
             go.GetComponent<RectTransform>().localScale = Vector3.one;
-            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+            go.transform.Find("Text").GetComponent<Text>().text = "";
         }
 
         les = RequestedOfOthersScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
@@ -68,9 +68,9 @@ public class Popsicle : MonoBehaviour
         }
         for (int j = 0; j < 5; j++)
         {
-            GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfOthersScroll.content.transform);
+            GameObject go = GameObject.Instantiate<GameObject>(requestedOfOthersItemPrefab, RequestedOfOthersScroll.content.transform);
             go.GetComponent<RectTransform>().localScale = Vector3.one;
-            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+            go.transform.Find("Text").GetComponent<Text>().text = "";
         }
 
 
@@ -142,7 +142,7 @@ public class Popsicle : MonoBehaviour
         {
             GameObject go = GameObject.Instantiate<GameObject>(requestedOfOthersItemPrefab, RequestedOfOthersScroll.content.transform);
             go.GetComponent<RectTransform>().localScale = Vector3.one;
-            go.transform.Find("Text").GetComponent<Text>().text = "DURR";
+            go.transform.Find("Text").GetComponent<Text>().text = req;
         }
     }
 

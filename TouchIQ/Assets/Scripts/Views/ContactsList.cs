@@ -164,9 +164,11 @@ public class ContactsList : MonoBehaviour
         ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
         ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
 
+        FillWithData();
+
         RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite, 2);
 
-        FillWithData();
+        
     }
 
     private void Start()

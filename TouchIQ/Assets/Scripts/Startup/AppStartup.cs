@@ -22,6 +22,7 @@ public class AppStartup : MonoBehaviour
         StartCoroutine(NetworkController.GetInstance().Connect());
         SpeechController.GetInstance().Initialize();
         PhotoController.GetInstance().Initialize();
+        CheatController.GetInstance().Initialize(ViewAnchorRef.transform);
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
     }

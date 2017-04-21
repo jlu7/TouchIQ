@@ -101,9 +101,12 @@ public class SpeechController : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.BeginArea(new Rect(10, 100, 200, 200));
-        GUILayout.Label(_speechRecognitionResult);
-        GUILayout.Label(_speechContextHits);
-        GUILayout.EndArea();
+        if (CheatController.GetInstance().DebugEnabled)
+        {
+            GUILayout.BeginArea(new Rect(10, 100, 200, 200));
+            GUILayout.Label(_speechRecognitionResult);
+            GUILayout.Label(_speechContextHits);
+            GUILayout.EndArea();
+        }
     }
 }

@@ -62,11 +62,14 @@ public class NetworkController : Photon.MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-        if (connectedToMaster)
+        if (CheatController.GetInstance().DebugEnabled)
         {
-            GUILayout.Label("Player Count: " + PhotonNetwork.countOfPlayers.ToString());
-            GUILayout.Label("Room Count: " + PhotonNetwork.GetRoomList().Length.ToString());
+            GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+            if (connectedToMaster)
+            {
+                GUILayout.Label("Player Count: " + PhotonNetwork.countOfPlayers.ToString());
+                GUILayout.Label("Room Count: " + PhotonNetwork.GetRoomList().Length.ToString());
+            }
         }
         
     }
