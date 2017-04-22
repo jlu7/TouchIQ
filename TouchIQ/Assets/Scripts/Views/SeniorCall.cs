@@ -167,7 +167,7 @@ public class SeniorCall : MonoBehaviour {
 
     public IEnumerator coShrinkVideo()
     {
-        Vector2 moveTo = new Vector2(150, -150);
+        Vector2 moveTo = new Vector2(50, -50);
         Vector2 scaleTo = new Vector2(175, 200);
         Vector2 bgScaleTo = new Vector3(.25f, .25f);
         if (!VideoFullScreen)
