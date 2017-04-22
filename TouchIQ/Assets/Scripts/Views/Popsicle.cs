@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -156,6 +157,30 @@ public class Popsicle : MonoBehaviour
                 go.GetComponent<RectTransform>().localScale = Vector3.one;
                 go.transform.Find("Text").GetComponent<Text>().text = req;
             }
+        }else
+        {
+            ScrollRect albumScrollRect = SeniorAlbums.transform.Find("Scroll View").GetComponent<ScrollRect>();
+            List<LayoutElement> les = albumScrollRect.content.transform.GetComponentsInChildren<LayoutElement>().ToList();
+            foreach (LayoutElement le in les)
+            {
+                Destroy(le.gameObject);
+            }
+            GameObject albumImagePrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/AlbumImage");
+            foreach(string photoName in contactModel.Photos)
+            {
+                Regex re = new Regex(@"([a-zA-Z]+)(\d+)");
+                Match result = re.Match(photoName);
+
+                string alphaPart = result.Groups[1].Value;
+                string numberPart = result.Groups[2].Value;
+                Sprite photoSprite = PhotoController.GetInstance().GetPhoto(alphaPart, photoName);
+                GameObject albumImageInstance = Instantiate<GameObject>(albumImagePrefab);
+                albumImageInstance.GetComponent<Image>().sprite = photoSprite;
+                albumImageInstance.transform.SetParent(albumScrollRect.content.transform);
+                albumImageInstance.GetComponent<RectTransform>().localScale = Vector3.one;
+                //albumScrollRect.Rebuild(CanvasUpdate.Prelayout);
+            }
+
         }
     }
 
