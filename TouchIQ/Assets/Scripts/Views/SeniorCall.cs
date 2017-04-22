@@ -99,7 +99,6 @@ public class SeniorCall : MonoBehaviour {
             ShrinkVideo();
             CloseShareScreen();
         });
-<<<<<<< HEAD
 
         transform.Find("CloseButton").GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -109,13 +108,6 @@ public class SeniorCall : MonoBehaviour {
             ShrinkVideo();
             CloseShareScreen();
         });
-
-        if (null != PhotoController.GetInstance().ActiveSet && null != spr)
-        {
-            NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
-        }
-=======
->>>>>>> cleaned up contactslist, fixed photo share loop bug
         
     }
 
