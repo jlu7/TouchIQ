@@ -27,64 +27,7 @@ public class ContactsList : MonoBehaviour
     {
         LoadData();
 
-        MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
-        BubbleList = new List<GameObject>();
-
-        GameObject popsicle = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle"), MainPanel.GetComponent<RectTransform>());
-        _Popsicle = popsicle.GetComponent<Popsicle>();
-
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial");
-        MiddleDial = UICreate.InstantiateRectTransformPrefab(prefab, MainPanel.GetComponent<RectTransform>());
-        MiddleDial.GetComponent<RectTransform>().localScale = new Vector3(1.75f, 1.75f, 1);
-
-        Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
-        callButton.onClick.AddListener(() => 
-        {
-            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
-            TransitionToCall();
-        });
-
-        if(UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
-        {
-            AddBubbleToList(0, 0);
-            AddBubbleToList(-25, 25);
-            AddBubbleToList(25, -25);
-        }else
-        {
-            AddBubbleToList(0, 0);
-            AddBubbleToList(-25, 25);
-            AddBubbleToList(-50, 50);
-            AddBubbleToList(50, -50);
-            AddBubbleToList(25, -25);
-        }
-
         
-
-        GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
-        BubbleList.Add(ContactList);
-        ContactList.GetComponent<RectTransform>().SetAsFirstSibling();
-
-        ContactList.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
-        ContactList.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        ContactList.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
-        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
-        ContactList.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
-        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
-
-        GameObject ContactAdd = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactAdd"), MiddleDial.GetComponent<RectTransform>());
-        BubbleList.Add(ContactAdd);
-        ContactAdd.GetComponent<RectTransform>().SetAsFirstSibling();
-
-        ContactAdd.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
-        ContactAdd.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        ContactAdd.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
-        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
-        ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
-        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
-
-        FillWithData();
-        Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        RotateArrow(BubbleList[2].transform.Find("Circle").GetComponent<RectTransform>().localRotation, img.sprite, 2);
     }
 
     public void AddBubbleToList(int rotationValue, int posValue)
@@ -112,6 +55,66 @@ public class ContactsList : MonoBehaviour
 
     private void Start()
     {
+        MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
+        BubbleList = new List<GameObject>();
+
+        GameObject popsicle = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle"), MainPanel.GetComponent<RectTransform>());
+        _Popsicle = popsicle.GetComponent<Popsicle>();
+
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/FrontPageButtons/MiddleDial");
+        MiddleDial = UICreate.InstantiateRectTransformPrefab(prefab, MainPanel.GetComponent<RectTransform>());
+        MiddleDial.GetComponent<RectTransform>().localScale = new Vector3(1.75f, 1.75f, 1);
+
+        Button callButton = MiddleDial.transform.Find("CallButton").GetComponent<Button>();
+        callButton.onClick.AddListener(() =>
+        {
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
+            TransitionToCall();
+        });
+
+        if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
+        {
+            AddBubbleToList(0, 0);
+            AddBubbleToList(-25, 25);
+            AddBubbleToList(25, -25);
+        }
+        else
+        {
+            AddBubbleToList(0, 0);
+            AddBubbleToList(-25, 25);
+            AddBubbleToList(-50, 50);
+            AddBubbleToList(50, -50);
+            AddBubbleToList(25, -25);
+        }
+
+
+
+        GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
+        BubbleList.Add(ContactList);
+        ContactList.GetComponent<RectTransform>().SetAsFirstSibling();
+
+        ContactList.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
+        ContactList.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        ContactList.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
+        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
+        ContactList.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
+        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
+
+        GameObject ContactAdd = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactAdd"), MiddleDial.GetComponent<RectTransform>());
+        BubbleList.Add(ContactAdd);
+        ContactAdd.GetComponent<RectTransform>().SetAsFirstSibling();
+
+        ContactAdd.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
+        ContactAdd.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        ContactAdd.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
+        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
+        ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
+        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
+
+        FillWithData();
+        Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        RotateArrow(BubbleList[2].transform.Find("Circle").GetComponent<RectTransform>().localRotation, img.sprite, 2);
+
         EnterAnimation();
     }
 
@@ -138,8 +141,23 @@ public class ContactsList : MonoBehaviour
 
             Image img = contactObject.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
             img.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + contactModel.Image);
+            Image fillingBar = contactObject.transform.Find("Circle/FillingBar").GetComponent<Image>();
+            fillingBar.fillAmount = (float)contactModel.Availability / 5f;
+            fillingBar.color = availabilityColors[contactModel.Availability];
+            fillingBar.Rebuild(CanvasUpdate.PreRender);
+            UnityEngine.Debug.Log(fillingBar.color.r);
         }
     }
+
+    private Dictionary<int, Color> availabilityColors = new Dictionary<int, Color>()
+    {
+        {1,new Color(239f/255f,43f/255f,64f/255f) },
+        {2,new Color(255f/255f,169f/255f,64f/255f) },
+        {3,new Color(255f/255f,210f/255f,25f/255f) },
+        {4,new Color(145f/255f,229f/255f,48f/255f) },
+        {5,new Color(3f/255f,149f/255f,43f/255f) }
+
+    };
 
     private IEnumerator coRotateArrowIE = null;
 
@@ -158,6 +176,9 @@ public class ContactsList : MonoBehaviour
     private IEnumerator coRotateArrow(Quaternion rotateTo, Sprite image, int tagData)
     {
         MiddleDial.transform.Find("ImageMask/Image").GetComponent<Image>().sprite = image;
+        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().fillAmount = (float)model[tagData].Availability / 5f;
+        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().color = availabilityColors[model[tagData].Availability];
+        
 
         float speed = 500;
         while (MiddleDial.transform.Find("ArrowOrigin").GetComponent<RectTransform>().localRotation.z != -rotateTo.z)
