@@ -258,7 +258,7 @@ public class SeniorCall : MonoBehaviour {
     {
         if (null != VideoChat.networkTexture)
         {
-            UnityEngine.Debug.Log(VideoChat.networkTexture.width + " , " + VideoChat.networkTexture.height);
+            //UnityEngine.Debug.Log(VideoChat.networkTexture.width + " , " + VideoChat.networkTexture.height);
             calleeCanvas.SetTexture(VideoChat.networkTexture);
             CalleeCanvasZoom.transform.Find("Callee").gameObject.SetActive(false);
         }
