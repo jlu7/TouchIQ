@@ -1,8 +1,8 @@
 {
 	"Caregiver": {
 		"Contacts": [{
-			"Name": "Linda",
-			"Image":"Linda",
+			"Name": "Cristina",
+			"Image":"Cristina",
 			"TimeToCall": "excellent time to call",
 			"LastTalked": "last talked 2 week ago",
 			"Availability": 5,
@@ -21,70 +21,31 @@
 			]
 		},
 		{
-			"Name": "Wendy",
-			"Image":"Wendy",
+			"Name": "Emma",
+			"Image":"Emma",
 			"TimeToCall": "good time to call",
 			"LastTalked": "last talked 1 month ago",
 			"Availability": 4,
 			"RequestedOfMe": [
-				"Buy Glucosamine",
-				"Book airplane tickets for her next visit",
-				"Send more pictures of the kids",
-				"Help with her iPad"
+				"Visit for Thanksgiving",
+				"Call more often",
+				"Call your sister",
+				"Help with her Uber"
 
 			],
 			"RequestedOfOthers": [
-				"@Angel - Change the meal service provider",
+				"@Wendy - Change the meal service provider",
 				"@David - Visit more often",
 				"@Wendy - Check my new prescription",
 				"@Edwin - Teach me how to use Uber"
 			]
 		},
 		{
-			"Name": "David",
-			"Image":"David",
+			"Name": "Angel",
+			"Image":"Angel",
 			"TimeToCall": "Ok time to call",
 			"LastTalked": "last talked 1 week ago",
 			"Availability": 3,
-			"RequestedOfMe": [
-				"Buy Glucosamine",
-				"Book airplane tickets for her next visit",
-				"Send more pictures of the kids",
-				"Help with her iPad"
-
-			],
-			"RequestedOfOthers": [
-				"@Angel - Change the meal service provider",
-				"@David - Visit more often",
-				"@Wendy - Check my new prescription",
-				"@Edwin - Teach me how to use Uber"
-			]
-		},
-		{
-			"Name": "Edwin",
-			"Image":"Edwin",
-			"TimeToCall": "excellent time to call",
-			"LastTalked": "last talked 2 week ago",
-			"Availability": 5,
-			"RequestedOfMe": [
-				"Buy Glucosamine",
-				"Book airplane tickets for her next visit",
-				"Send more pictures of the kids",
-				"Help with her iPad"
-
-			],
-			"RequestedOfOthers": [
-				"@Angel - Change the meal service provider",
-				"@David - Visit more often",
-				"@Wendy - Check my new prescription",
-				"@Edwin - Teach me how to use Uber"
-			]
-		},{
-			"Name": "Angel",
-			"Image":"Angel",
-			"TimeToCall": "not a good time to call",
-			"LastTalked": "last talked 1 day ago",
-			"Availability": 1,
 			"RequestedOfMe": [
 				"Buy Glucosamine",
 				"Book airplane tickets for her next visit",
@@ -103,34 +64,44 @@
 	},
 	"Senior": {
 		"Contacts": [{
-			"Name": "Cristina",
+			"Name": "Linda",
+			"Image": "Linda",
+			"TimeToCall": "good time to call",
+			"LastTalked": "last talked 1 week ago",
+			"Availability": 5, 
+			"Photos": ["ballet1", "ballet2", "ballet3", "camp1"]
+		},
+		{
+			"Name": "Edwin",
+			"Image": "Edwin",
 			"TimeToCall": "good time to call",
 			"LastTalked": "last talked 2 week ago",
-			"Availability": 4
+			"Availability": 4,
+			"Photos": ["vacation1", "vacation2", "vacation3", "vacation4"]
 		},
 		{
-			"Name": "Emma",
-			"TimeToCall": "excellent time to call",
-			"LastTalked": "last talked 1 week ago",
-			"Availability": 5
-		},
-		{
-			"Name": "Cristina",
+			"Name": "Angel",
+			"Image": "Angel",
 			"TimeToCall": "good time to call",
-			"LastTalked": "last talked 2 week ago",
-			"Availability": 4
+			"LastTalked": "last talked 1 day ago",
+			"Availability": 4,
+			"Photos": ["dog1", "dog2", "dog3", "dog4"]
 		},
 		{
-			"Name": "Emma",
-			"TimeToCall": "excellent time to call",
-			"LastTalked": "last talked 1 week ago",
-			"Availability": 5
+			"Name": "David",
+			"Image": "David",
+			"TimeToCall": "ok time to call",
+			"LastTalked": "last talked 1 month ago",
+			"Availability": 3,
+			"Photos": ["grandpa1", "grandpa2", "grandpa3", "grandpa4"]
 		},
 		{
-			"Name": "Emma",
-			"TimeToCall": "excellent time to call",
+			"Name": "Wendy",
+			"Image": "Wendy",
+			"TimeToCall": "not a good time to call",
 			"LastTalked": "last talked 1 week ago",
-			"Availability": 5
+			"Availability": 1,
+			"Photos": ["birthday1", "birthday2", "birthday3", "birthday4"]
 		}
 	]
 	}

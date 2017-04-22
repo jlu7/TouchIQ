@@ -23,8 +23,11 @@ public class CheatController : MonoBehaviour {
 
     public bool DebugEnabled = false;
 
+    private Transform CanvasTransform;
+
     public void Initialize(Transform canvasTransform)
     {
+        this.CanvasTransform = canvasTransform;
         GameObject cheatPrefab = Resources.Load<GameObject>("Prefabs/CheatScreen");
         CheatScreen = Instantiate(cheatPrefab, canvasTransform);
         //CheatScreen.SetActive(false);
@@ -70,6 +73,7 @@ public class CheatController : MonoBehaviour {
         if(Input.touchCount == 3 || Input.GetKeyDown(KeyCode.Tab))
         {
             //CheatScreen.SetActive(!CheatScreen.activeSelf);
+            CheatScreen.transform.SetAsLastSibling();
             CheatScreen.GetComponent<Canvas>().enabled = !CheatScreen.GetComponent<Canvas>().enabled;
         }
     }

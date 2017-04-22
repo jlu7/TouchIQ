@@ -131,28 +131,31 @@ public class Popsicle : MonoBehaviour
         TimeToCallText.text = contactModel.TimeToCall;
         LastTalkedText.text = contactModel.LastTalked;
 
-        List<LayoutElement> les = RequestedOfMeScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
-        foreach (LayoutElement le in les)
+        if(UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
         {
-            Destroy(le.gameObject);
-        }
-        foreach(string req in contactModel.RequestedOfMe)
-        {
-            GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfMeScroll.content.transform);
-            go.GetComponent<RectTransform>().localScale = Vector3.one;
-            go.transform.Find("Text").GetComponent<Text>().text = req;
-        }
+            List<LayoutElement> les = RequestedOfMeScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+            foreach (LayoutElement le in les)
+            {
+                Destroy(le.gameObject);
+            }
+            foreach (string req in contactModel.RequestedOfMe)
+            {
+                GameObject go = GameObject.Instantiate<GameObject>(requestedOfMeItemPrefab, RequestedOfMeScroll.content.transform);
+                go.GetComponent<RectTransform>().localScale = Vector3.one;
+                go.transform.Find("Text").GetComponent<Text>().text = req;
+            }
 
-        les = RequestedOfOthersScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
-        foreach (LayoutElement le in les)
-        {
-            Destroy(le.gameObject);
-        }
-        foreach (string req in contactModel.RequestedOfOthers)
-        {
-            GameObject go = GameObject.Instantiate<GameObject>(requestedOfOthersItemPrefab, RequestedOfOthersScroll.content.transform);
-            go.GetComponent<RectTransform>().localScale = Vector3.one;
-            go.transform.Find("Text").GetComponent<Text>().text = req;
+            les = RequestedOfOthersScroll.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
+            foreach (LayoutElement le in les)
+            {
+                Destroy(le.gameObject);
+            }
+            foreach (string req in contactModel.RequestedOfOthers)
+            {
+                GameObject go = GameObject.Instantiate<GameObject>(requestedOfOthersItemPrefab, RequestedOfOthersScroll.content.transform);
+                go.GetComponent<RectTransform>().localScale = Vector3.one;
+                go.transform.Find("Text").GetComponent<Text>().text = req;
+            }
         }
     }
 

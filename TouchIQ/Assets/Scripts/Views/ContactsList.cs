@@ -18,7 +18,7 @@ public class ContactsList : MonoBehaviour
     GameObject MiddleDial;
     Popsicle _Popsicle;
     List<GameObject> BubbleList;
-    ContactsUsersModel model;
+    List<ContactModel> model;
 
     IEnumerator OnlyOneAnimation;
 
@@ -44,11 +44,21 @@ public class ContactsList : MonoBehaviour
             TransitionToCall();
         });
 
-        AddBubbleToList(0,0);
-        AddBubbleToList(-25, 25);
-        AddBubbleToList(-50, 50);
-        AddBubbleToList(50, -50);
-        AddBubbleToList(25, -25);
+        if(UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
+        {
+            AddBubbleToList(0, 0);
+            AddBubbleToList(-25, 25);
+            AddBubbleToList(25, -25);
+        }else
+        {
+            AddBubbleToList(0, 0);
+            AddBubbleToList(-25, 25);
+            AddBubbleToList(-50, 50);
+            AddBubbleToList(50, -50);
+            AddBubbleToList(25, -25);
+        }
+
+        
 
         GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
         BubbleList.Add(ContactList);
@@ -107,15 +117,22 @@ public class ContactsList : MonoBehaviour
 
     void LoadData()
     {
-        model = UserDataController.GetInstance().ContactsUsers;
+        if(UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
+        {
+            model = UserDataController.GetInstance().ContactsUsers.Caregiver.Contacts;
+        }else
+        {
+            model = UserDataController.GetInstance().ContactsUsers.Senior.Contacts;
+        }
+        
     }
 
     void FillWithData()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < model.Count; i++)
         {
             GameObject contactObject = BubbleList[i];
-            ContactModel contactModel = model.Caregiver.Contacts[i];
+            ContactModel contactModel = model[i];
 
             contactObject.AddComponent<ContactTag>().TagData = i;
 
@@ -153,7 +170,7 @@ public class ContactsList : MonoBehaviour
                 new Quaternion(rotateTo.x, rotateTo.y, -rotateTo.z, rotateTo.w), step);
             yield return null;
         }
-        _Popsicle.SetUserPopsicleInfo(model.Caregiver.Contacts[tagData]);
+        _Popsicle.SetUserPopsicleInfo(model[tagData]);
     }
 
     public void IncomingCall()

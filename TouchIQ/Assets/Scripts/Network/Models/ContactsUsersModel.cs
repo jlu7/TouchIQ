@@ -39,4 +39,6 @@ public class ContactModel
     public List<string> RequestedOfMe { get; private set; }
     [JsonProperty]
     public List<string> RequestedOfOthers { get; private set; }
+    [JsonProperty]
+    public List<string> Photos { get; private set; }
 }
