@@ -12,6 +12,7 @@ public class SeniorCall : MonoBehaviour {
     RectTransform CalleeCanvasZoom;
     Vector2 CalleeOriginalSize;
     GameObject videoCall;
+    Text CallTime;
 
     Button endCall;
 
@@ -22,6 +23,9 @@ public class SeniorCall : MonoBehaviour {
         CalleeCanvasZoom = remoteUserPanel.GetComponent<RectTransform>();
         calleeCanvas = remoteUserPanel.transform.Find("VideoCallee").GetComponent<CanvasRenderer>();
         CalleeOriginalSize = remoteUserPanel.transform.Find("VideoCallee").GetComponent<RectTransform>().sizeDelta;
+        CallTime = transform.Find("BottomBar/Tab/Calling").GetComponent<Text>();
+
+        StartCoroutine(CallTimer());
 
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
@@ -188,7 +192,66 @@ public class SeniorCall : MonoBehaviour {
             calleeCanvas.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(CalleeCanvasZoom.sizeDelta, scaleTo, step);
             yield return null;
         }
+    }
 
+    float TotalTime = 0f;
+
+    public IEnumerator CallTimer()
+    {
+        int hours = 0;
+        int minutes = 0;
+        float seconds = 0;
+
+        string hourString = "00";
+        string minuteString = "00";
+        string secondString = "00";
+
+        while (true)
+        {
+            if (seconds > 60)
+            {
+                seconds = 0;
+                minutes++;
+            }
+
+            if (minutes > 59)
+            {
+                minutes = 0;
+                hours++;
+            }
+
+            if (minutes < 10)
+            {
+                minuteString = "0" + minutes;
+            }
+            else
+            {
+                minuteString = minutes.ToString();
+            }
+
+            if (hours < 10)
+            {
+                hourString = "0" + hours.ToString();
+            }
+            else
+            {
+                hourString = hours.ToString();
+            }
+
+            if (seconds < 10)
+            {
+                secondString = "0" + seconds.ToString("N0");
+            }
+            else
+            {
+                secondString = seconds.ToString("N0");
+            }
+
+            seconds += Time.deltaTime;
+
+            CallTime.text = hourString + ":" + minuteString + ":" + secondString;
+            yield return null;
+        }
     }
 
     void Update()
