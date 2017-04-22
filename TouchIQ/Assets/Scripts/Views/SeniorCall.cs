@@ -19,6 +19,8 @@ public class SeniorCall : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        SoundManager.GetInstance().StopAllLoopingSoundEffects();
+
         remoteUserPanel = transform.Find("Panel").gameObject;
         CalleeCanvasZoom = remoteUserPanel.GetComponent<RectTransform>();
         calleeCanvas = remoteUserPanel.transform.Find("VideoCallee").GetComponent<CanvasRenderer>();

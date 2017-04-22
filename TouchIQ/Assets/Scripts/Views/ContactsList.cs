@@ -69,6 +69,7 @@ public class ContactsList : MonoBehaviour
         callButton.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
+            SoundManager.GetInstance().PlaySingle("SoundFX/Ringing_Phone", true);
             TransitionToCall();
         });
 
