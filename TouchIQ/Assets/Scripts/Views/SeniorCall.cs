@@ -19,9 +19,9 @@ public class SeniorCall : MonoBehaviour {
     void Start ()
     {
         remoteUserPanel = transform.Find("Panel").gameObject;
-        CalleeCanvasZoom = remoteUserPanel.transform.Find("Mask").GetComponent<RectTransform>();
-        calleeCanvas = remoteUserPanel.transform.Find("Mask/VideoCallee").GetComponent<CanvasRenderer>();
-        CalleeOriginalSize = remoteUserPanel.transform.Find("Mask/VideoCallee").GetComponent<RectTransform>().sizeDelta;
+        CalleeCanvasZoom = remoteUserPanel.GetComponent<RectTransform>();
+        calleeCanvas = remoteUserPanel.transform.Find("VideoCallee").GetComponent<CanvasRenderer>();
+        CalleeOriginalSize = remoteUserPanel.transform.Find("VideoCallee").GetComponent<RectTransform>().sizeDelta;
 
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
@@ -167,7 +167,7 @@ public class SeniorCall : MonoBehaviour {
 
     public IEnumerator coShrinkVideo()
     {
-        Vector2 moveTo = new Vector2(50, -50);
+        Vector2 moveTo = new Vector2(150, -150);
         Vector2 scaleTo = new Vector2(175, 200);
         Vector2 bgScaleTo = new Vector3(.25f, .25f);
         if (!VideoFullScreen)
