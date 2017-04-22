@@ -36,7 +36,7 @@ public class CheatController : MonoBehaviour {
         if(Input.touchCount == 3 || Input.GetKeyDown(KeyCode.Tab))
         {
             //CheatScreen.SetActive(!CheatScreen.activeSelf);
-            CheatScreen.GetComponent<Canvas>().enabled = true;
+            CheatScreen.GetComponent<Canvas>().enabled = !CheatScreen.GetComponent<Canvas>().enabled;
         }
     }
 }
