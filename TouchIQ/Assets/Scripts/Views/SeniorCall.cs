@@ -70,6 +70,7 @@ public class SeniorCall : MonoBehaviour {
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
+        transform.Find("CloseButton").gameObject.SetActive(true);
         var contentView = transform.Find("SharedPhoto/Albums/Viewport/Content");
         contentView.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50);
         contentView.Find("Image").GetComponent<Image>().sprite = spr;
@@ -84,11 +85,22 @@ public class SeniorCall : MonoBehaviour {
 
         closeButton.onClick.AddListener(() =>
         {
+            closeButton.onClick.RemoveAllListeners();
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             ShrinkVideo();
             CloseShareScreen();
         });
-        if(null != PhotoController.GetInstance().ActiveSet && null != spr)
+
+        transform.Find("CloseButton").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Debug.Log("Lkj;lksjdfl;kjsdf");
+            transform.Find("CloseButton").GetComponent<Button>().onClick.RemoveAllListeners();
+            SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
+            ShrinkVideo();
+            CloseShareScreen();
+        });
+
+        if (null != PhotoController.GetInstance().ActiveSet && null != spr)
         {
             NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
         }
@@ -148,6 +160,7 @@ public class SeniorCall : MonoBehaviour {
         transform.Find("SharedPhoto/X").gameObject.SetActive(false);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(false);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(true);
+        transform.Find("CloseButton").gameObject.SetActive(false);
     }
 
     IEnumerator IEShrinkVideo;
