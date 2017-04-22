@@ -16,12 +16,18 @@ public class AppStartup : MonoBehaviour
     IEnumerator Startup()
     {
         UserDataController.GetInstance().Initialize();
-        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
+        while(UserDataController.GetInstance().ContactsUsers == null)
+        {
+            yield return null;
+        }
         SoundManager.GetInstance();
         yield return null;
         StartCoroutine(NetworkController.GetInstance().Connect());
         SpeechController.GetInstance().Initialize();
         PhotoController.GetInstance().Initialize();
+
+        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
+
         CheatController.GetInstance().Initialize(ViewAnchorRef.transform);
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();

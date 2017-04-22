@@ -6,10 +6,15 @@ using UnityEngine.UI;
 
 public class Popsicle : MonoBehaviour
 {
-    Button ButtonComponent;
-    RectTransform View;
+    
     public bool ViewIsVisible = false;
     public bool AcceptingInput = true;
+
+    Button ButtonComponent;
+    RectTransform View;
+
+    GameObject CaregiverRequests;
+    GameObject SeniorAlbums;
 
     Text NameText;
     Text TimeToCallText;
@@ -31,6 +36,9 @@ public class Popsicle : MonoBehaviour
         //ButtonComponent.onClick.AddListener(ShowScrollView);
         View = this.GetComponent<RectTransform>();
 
+        CaregiverRequests = this.transform.Find("Requests").gameObject;
+        SeniorAlbums = this.transform.Find("Albums").gameObject;
+
         //Grab refs too all of the custom Text
         NameText = this.transform.Find("Tab/Name").GetComponent<Text>();
         NameText.text = "";
@@ -38,10 +46,6 @@ public class Popsicle : MonoBehaviour
         TimeToCallText.text = "";
         LastTalkedText = this.transform.Find("Tab/LastTalked").GetComponent<Text>();
         LastTalkedText.text = "";
-        //RequestedOfMeText = this.transform.Find("Requests/RequestedOfMe/RequestedOfMeBG/RequestedOfMeText").GetComponent<Text>();
-        //RequestedOfMeText.text = "DURR";
-        //RequestedOfOthersText = this.transform.Find("Requests/RequestedOfOthers/RequestedOfOthersBG/RequestedOfMeText").GetComponent<Text>();
-        //RequestedOfOthersText.text = "DURR";
 
         requestedOfMeItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfMeItem");
         requestedOfOthersItemPrefab = Resources.Load<GameObject>("Prefabs/ContactsScreen/RequestedOfOthersItem");
@@ -79,6 +83,12 @@ public class Popsicle : MonoBehaviour
     private void Start()
     {
         View.anchoredPosition = new Vector2(View.anchoredPosition.x, -406);
+        UserDataController.UserType userType = UserDataController.GetInstance().ActiveUserType;
+        if (userType == UserDataController.UserType.Senior)
+        {
+            CaregiverRequests.SetActive(false);
+            SeniorAlbums.SetActive(true);
+        }
     }
     /*
     public void ChangeState(ContactsList.CurrentState State)
