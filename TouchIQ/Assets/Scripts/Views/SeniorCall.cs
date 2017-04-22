@@ -79,7 +79,11 @@ public class SeniorCall : MonoBehaviour {
 
     private void SharedPhotoViewOn(Sprite spr)
     {
-        ShrinkVideo();
+        if (VideoFullScreen)
+        {
+            ShrinkVideo();
+        }
+
         transform.Find("SharedPhoto/X").gameObject.SetActive(true);
         transform.Find("SharedPhoto/Albums").gameObject.SetActive(true);
         transform.Find("SharedPhoto/DragSlot").gameObject.SetActive(false);
@@ -94,6 +98,7 @@ public class SeniorCall : MonoBehaviour {
         UserPanelRef.ShowScrollView();
 
         Button closeButton = transform.Find("SharedPhoto/X").GetComponent<Button>();
+
         closeButton.onClick.RemoveAllListeners();
 
         closeButton.onClick.AddListener(() =>
@@ -104,15 +109,14 @@ public class SeniorCall : MonoBehaviour {
             CloseShareScreen();
         });
 
+        transform.Find("CloseButton").GetComponent<Button>().onClick.RemoveAllListeners();
         transform.Find("CloseButton").GetComponent<Button>().onClick.AddListener(() =>
         {
-            Debug.Log("Lkj;lksjdfl;kjsdf");
             transform.Find("CloseButton").GetComponent<Button>().onClick.RemoveAllListeners();
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             ShrinkVideo();
             CloseShareScreen();
         });
-        
     }
 
     IEnumerator IEMoveAction;
@@ -174,6 +178,7 @@ public class SeniorCall : MonoBehaviour {
         Vector2 moveTo = new Vector2(50, -50);
         Vector2 scaleTo = new Vector2(175, 200);
         Vector2 bgScaleTo = new Vector3(.25f, .25f);
+
         if (!VideoFullScreen)
         {
             moveTo = new Vector2(0, 0);
