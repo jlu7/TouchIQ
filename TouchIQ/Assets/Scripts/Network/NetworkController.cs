@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,7 +86,7 @@ public class NetworkController : Photon.MonoBehaviour
         {
             if (ViewController.GetInstance().CurrentView.name.Contains("Contact"))
             {
-                StartCoroutine(ViewController.GetInstance().CurrentView.GetComponent<ContactsList>().IncomingCall());
+                ViewController.GetInstance().CurrentView.GetComponent<ContactsList>().IncomingCall();
             }
         }
     }

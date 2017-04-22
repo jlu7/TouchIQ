@@ -20,6 +20,8 @@ public class ContactsList : MonoBehaviour
     List<GameObject> BubbleList;
     ContactsUsersModel model;
 
+    IEnumerator OnlyOneAnimation;
+
 
     private void Awake ()
     {
@@ -39,7 +41,7 @@ public class ContactsList : MonoBehaviour
         callButton.onClick.AddListener(() => 
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
-            StartCoroutine(TransitionToCall());
+            TransitionToCall();
         });
 
         GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
@@ -167,20 +169,16 @@ public class ContactsList : MonoBehaviour
         FillWithData();
 
         RotateArrow(Test3.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage3.sprite, 2);
-
-        
     }
 
     private void Start()
     {
-        
-        StartCoroutine(EnterAnimation());
+        EnterAnimation();
     }
 
     void LoadData()
     {
         model = UserDataController.GetInstance().ContactsUsers;
-        
     }
 
     void FillWithData()
@@ -229,7 +227,19 @@ public class ContactsList : MonoBehaviour
         _Popsicle.SetUserPopsicleInfo(model.Caregiver.Contacts[tagData]);
     }
 
-    public IEnumerator IncomingCall()
+    public void IncomingCall()
+    {
+        if (OnlyOneAnimation != null)
+        {
+            StopCoroutine(OnlyOneAnimation);
+        }
+
+        OnlyOneAnimation = null;
+        OnlyOneAnimation = coIncomingCall();
+        StartCoroutine(OnlyOneAnimation);
+    }
+
+    private IEnumerator coIncomingCall()
     {
         if (_Popsicle.ViewIsVisible)
         {
@@ -256,11 +266,24 @@ public class ContactsList : MonoBehaviour
         ViewController.GetInstance().CreateView("Prefabs/SeniorCall/IncomingCallScreen");
     }
 
-    private IEnumerator TransitionToCall()
+    public void TransitionToCall()
+    {
+        if (OnlyOneAnimation != null)
+        {
+            StopCoroutine(OnlyOneAnimation);
+        }
+
+        OnlyOneAnimation = null;
+        OnlyOneAnimation = coTransitionToCall();
+        StartCoroutine(OnlyOneAnimation);
+    }
+
+    private IEnumerator coTransitionToCall()
     {
         _Popsicle.HideScrollView();
 
         Image Arrow = MiddleDial.transform.Find("ArrowOrigin/Arrow").GetComponent<Image>();
+        StartCoroutine(RotateDotRings());
 
         float timeToReachTarget = 2f;
 
@@ -284,7 +307,41 @@ public class ContactsList : MonoBehaviour
         ViewController.GetInstance().CreateView("Prefabs/SeniorCall/SeniorCall");
     }
 
-    private IEnumerator EnterAnimation()
+    protected IEnumerator RotateDotRings()
+    {
+        RectTransform DotRing = MiddleDial.transform.Find("DotRing").GetComponent<RectTransform>();
+
+        float timeToReachTarget = 2f;
+
+        float t = 0f;
+        while (t < 1)
+        {
+            t += Time.deltaTime / timeToReachTarget;
+
+            DotRing.transform.localScale = Vector3.Lerp(DotRing.transform.localScale, new Vector3(1.25f, 1.25f), t);
+            yield return null;
+        }
+
+        while (true)
+        {
+            DotRing.Rotate(Vector3.forward * Time.deltaTime * 4);
+            yield return null;
+        }
+    }
+
+    private void EnterAnimation()
+    {
+        if (OnlyOneAnimation != null)
+        {
+            StopCoroutine(OnlyOneAnimation);
+        }
+
+        OnlyOneAnimation = null;
+        OnlyOneAnimation = coEnterAnimation();
+        StartCoroutine(OnlyOneAnimation);
+    }
+
+    private IEnumerator coEnterAnimation()
     {
         yield return new WaitForSeconds(1f);
         _Popsicle.ShowScrollView();
