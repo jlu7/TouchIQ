@@ -25,6 +25,12 @@ public class SeniorCall : MonoBehaviour {
         CalleeOriginalSize = remoteUserPanel.transform.Find("VideoCallee").GetComponent<RectTransform>().sizeDelta;
         CallTime = transform.Find("BottomBar/Tab/Calling").GetComponent<Text>();
 
+        if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Senior)
+        {
+            transform.Find("BottomBar/InCall/Sound").gameObject.SetActive(false);
+            transform.Find("BottomBar/InCall/Mic").gameObject.SetActive(false);
+        }
+
         StartCoroutine(CallTimer());
 
         localUserPanel = transform.Find("UserPanel").gameObject;
