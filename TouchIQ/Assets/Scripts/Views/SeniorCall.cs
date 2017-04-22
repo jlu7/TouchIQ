@@ -177,7 +177,7 @@ public class SeniorCall : MonoBehaviour {
         if (!VideoFullScreen)
         {
             moveTo = new Vector2(0, 0);
-            scaleTo = new Vector2(710, 1136);
+            scaleTo = new Vector2(710, 900);
         }
 
         VideoFullScreen = !VideoFullScreen;
