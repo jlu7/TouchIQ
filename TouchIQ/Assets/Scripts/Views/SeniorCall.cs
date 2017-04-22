@@ -39,7 +39,7 @@ public class SeniorCall : MonoBehaviour {
 
         StartCoroutine(videoCall.GetComponent<VideoCall>().SetupVideo(OnVideoStart));
         DragSlot dragComponent = transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
-        dragComponent.method += SharedPhotoViewOn;
+        dragComponent.method += PhotoDragHandler;
         NetworkController.GetInstance().OnPhotoReceived += ReceivedNetworkPhoto;
     }
 
@@ -61,6 +61,15 @@ public class SeniorCall : MonoBehaviour {
     private void ReceivedNetworkPhoto(string setName, string photoName)
     {
         Sprite spr = PhotoController.GetInstance().GetPhoto(setName, photoName);
+        SharedPhotoViewOn(spr);
+    }
+
+    private void PhotoDragHandler(Sprite spr)
+    {
+        if (null != PhotoController.GetInstance().ActiveSet && null != spr)
+        {
+            NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
+        }
         SharedPhotoViewOn(spr);
     }
 
@@ -90,6 +99,7 @@ public class SeniorCall : MonoBehaviour {
             ShrinkVideo();
             CloseShareScreen();
         });
+<<<<<<< HEAD
 
         transform.Find("CloseButton").GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -104,24 +114,9 @@ public class SeniorCall : MonoBehaviour {
         {
             NetworkController.GetInstance().SendPhotoMessage(PhotoController.GetInstance().ActiveSet.Name, spr.name);
         }
+=======
+>>>>>>> cleaned up contactslist, fixed photo share loop bug
         
-
-        /*        Button Right = transform.Find("SharedPhoto/Albums/RightButton").GetComponent<Button>();
-                Right.onClick.RemoveAllListeners();
-
-                Right.onClick.AddListener(() =>
-                {
-                    MoveAction(-550);
-                });
-
-                Button Left = transform.Find("SharedPhoto/Albums/LeftButton").GetComponent<Button>();
-                Left.onClick.RemoveAllListeners();
-
-                Left.onClick.AddListener(() =>
-                {
-                    MoveAction(550);
-                });
-                */
     }
 
     IEnumerator IEMoveAction;
@@ -208,6 +203,7 @@ public class SeniorCall : MonoBehaviour {
     {
         if (null != VideoChat.networkTexture)
         {
+            UnityEngine.Debug.Log(VideoChat.networkTexture.width + " , " + VideoChat.networkTexture.height);
             calleeCanvas.SetTexture(VideoChat.networkTexture);
             CalleeCanvasZoom.transform.Find("Callee").gameObject.SetActive(false);
         }

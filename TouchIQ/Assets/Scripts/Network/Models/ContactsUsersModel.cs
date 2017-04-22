@@ -30,6 +30,8 @@ public class ContactModel
     [JsonProperty]
     public string Image { get; private set; }
     [JsonProperty]
+    public int Availability { get; private set; }
+    [JsonProperty]
     public string TimeToCall { get; private set; }
     [JsonProperty]
     public string LastTalked { get; private set; }

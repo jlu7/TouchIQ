@@ -1,126 +1,137 @@
 {
 	"Caregiver": {
 		"Contacts": [{
-			"Name": "Tammy",
-			"Image":"Emma",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago",
+			"Name": "Linda",
+			"Image":"Linda",
+			"TimeToCall": "excellent time to call",
+			"LastTalked": "last talked 2 week ago",
+			"Availability": 5,
 			"RequestedOfMe": [
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber"
+				"Buy Glucosamine",
+				"Book airplane tickets for her next visit",
+				"Send more pictures of the kids",
+				"Help with her iPad"
 
 			],
 			"RequestedOfOthers": [
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving"
+				"@Angel - Change the meal service provider",
+				"@David - Visit more often",
+				"@Wendy - Check my new prescription",
+				"@Edwin - Teach me how to use Uber"
 			]
 		},
 		{
-			"Name": "Tammy2",
-			"Image":"Emma",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago",
+			"Name": "Wendy",
+			"Image":"Wendy",
+			"TimeToCall": "good time to call",
+			"LastTalked": "last talked 1 month ago",
+			"Availability": 4,
 			"RequestedOfMe": [
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber"
+				"Buy Glucosamine",
+				"Book airplane tickets for her next visit",
+				"Send more pictures of the kids",
+				"Help with her iPad"
 
 			],
 			"RequestedOfOthers": [
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving"
+				"@Angel - Change the meal service provider",
+				"@David - Visit more often",
+				"@Wendy - Check my new prescription",
+				"@Edwin - Teach me how to use Uber"
 			]
 		},
 		{
-			"Name": "Tammy3",
-			"Image":"Emma",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago",
+			"Name": "David",
+			"Image":"David",
+			"TimeToCall": "Ok time to call",
+			"LastTalked": "last talked 1 week ago",
+			"Availability": 3,
 			"RequestedOfMe": [
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber"
+				"Buy Glucosamine",
+				"Book airplane tickets for her next visit",
+				"Send more pictures of the kids",
+				"Help with her iPad"
 
 			],
 			"RequestedOfOthers": [
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving"
+				"@Angel - Change the meal service provider",
+				"@David - Visit more often",
+				"@Wendy - Check my new prescription",
+				"@Edwin - Teach me how to use Uber"
 			]
 		},
 		{
-			"Name": "Tammy4",
-			"Image":"Emma",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago",
+			"Name": "Edwin",
+			"Image":"Edwin",
+			"TimeToCall": "excellent time to call",
+			"LastTalked": "last talked 2 week ago",
+			"Availability": 5,
 			"RequestedOfMe": [
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber"
+				"Buy Glucosamine",
+				"Book airplane tickets for her next visit",
+				"Send more pictures of the kids",
+				"Help with her iPad"
 
 			],
 			"RequestedOfOthers": [
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving"
+				"@Angel - Change the meal service provider",
+				"@David - Visit more often",
+				"@Wendy - Check my new prescription",
+				"@Edwin - Teach me how to use Uber"
 			]
 		},{
-			"Name": "Tammy5",
-			"Image":"Emma",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago",
+			"Name": "Angel",
+			"Image":"Angel",
+			"TimeToCall": "not a good time to call",
+			"LastTalked": "last talked 1 day ago",
+			"Availability": 1,
 			"RequestedOfMe": [
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber",
-				"grandma's having trouble using uber"
+				"Buy Glucosamine",
+				"Book airplane tickets for her next visit",
+				"Send more pictures of the kids",
+				"Help with her iPad"
 
 			],
 			"RequestedOfOthers": [
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving",
-				"@michael - visit for Thanksgiving"
+				"@Angel - Change the meal service provider",
+				"@David - Visit more often",
+				"@Wendy - Check my new prescription",
+				"@Edwin - Teach me how to use Uber"
 			]
 		}
 		]
 	},
 	"Senior": {
 		"Contacts": [{
-			"Name": "Tammy",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago"
+			"Name": "Cristina",
+			"TimeToCall": "good time to call",
+			"LastTalked": "last talked 2 week ago",
+			"Availability": 4
 		},
 		{
-			"Name": "Tammy",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago"
+			"Name": "Emma",
+			"TimeToCall": "excellent time to call",
+			"LastTalked": "last talked 1 week ago",
+			"Availability": 5
 		},
 		{
-			"Name": "Tammy",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago"
+			"Name": "Cristina",
+			"TimeToCall": "good time to call",
+			"LastTalked": "last talked 2 week ago",
+			"Availability": 4
 		},
 		{
-			"Name": "Tammy",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago"
+			"Name": "Emma",
+			"TimeToCall": "excellent time to call",
+			"LastTalked": "last talked 1 week ago",
+			"Availability": 5
 		},
 		{
-			"Name": "Tammy",
-			"TimeToCall": "EXCELLENT Time To Call",
-			"LastTalked": "Last talked 2 WEEKS ago"
-		}]
+			"Name": "Emma",
+			"TimeToCall": "excellent time to call",
+			"LastTalked": "last talked 1 week ago",
+			"Availability": 5
+		}
+	]
 	}
 }

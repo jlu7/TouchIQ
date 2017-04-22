@@ -306,6 +306,7 @@ public class VideoCall : Photon.MonoBehaviour
     void ReceiveVideo(int x, int y, byte[] videoData, double timestamp)
     {
         VideoChat.ToVideo(x, y, videoData, timestamp);
+        //UnityEngine.Debug.Log("x: " + x + " , y: " + y);
     }
 
     [PunRPC]
