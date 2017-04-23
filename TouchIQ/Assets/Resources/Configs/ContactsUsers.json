@@ -1,108 +1,132 @@
 {
-	"Caregiver": {
-		"Contacts": [{
-			"Name": "Cristina",
-			"Image":"Cristina",
-			"TimeToCall": "excellent time to call",
-			"LastTalked": "last talked 2 week ago",
-			"Availability": 5,
-			"RequestedOfMe": [
-				"Buy Glucosamine",
-				"Book airplane tickets for her next visit",
-				"Send more pictures of the kids",
-				"Help with her iPad"
-
-			],
-			"RequestedOfOthers": [
-				"@Angel - Change the meal service provider",
-				"@David - Visit more often",
-				"@Wendy - Check my new prescription",
-				"@Edwin - Teach me how to use Uber"
-			]
-		},
-		{
-			"Name": "Emma",
-			"Image":"Emma",
-			"TimeToCall": "good time to call",
-			"LastTalked": "last talked 1 month ago",
-			"Availability": 4,
-			"RequestedOfMe": [
-				"Visit for Thanksgiving",
-				"Call more often",
-				"Call your sister",
-				"Help with her Uber"
-
-			],
-			"RequestedOfOthers": [
-				"@Wendy - Change the meal service provider",
-				"@David - Visit more often",
-				"@Wendy - Check my new prescription",
-				"@Edwin - Teach me how to use Uber"
-			]
-		},
-		{
-			"Name": "Angel",
-			"Image":"Angel",
-			"TimeToCall": "Ok time to call",
-			"LastTalked": "last talked 1 week ago",
-			"Availability": 3,
-			"RequestedOfMe": [
-				"Buy Glucosamine",
-				"Book airplane tickets for her next visit",
-				"Send more pictures of the kids",
-				"Help with her iPad"
-
-			],
-			"RequestedOfOthers": [
-				"@Angel - Change the meal service provider",
-				"@David - Visit more often",
-				"@Wendy - Check my new prescription",
-				"@Edwin - Teach me how to use Uber"
-			]
-		}
-		]
-	},
-	"Senior": {
-		"Contacts": [{
-			"Name": "Linda",
-			"Image": "Linda",
-			"TimeToCall": "good time to call",
-			"LastTalked": "last talked 1 week ago",
-			"Availability": 5, 
-			"Photos": ["ballet1", "ballet2", "ballet3", "camp1"]
-		},
-		{
-			"Name": "Edwin",
-			"Image": "Edwin",
-			"TimeToCall": "good time to call",
-			"LastTalked": "last talked 2 week ago",
-			"Availability": 4,
-			"Photos": ["vacation1", "vacation2", "vacation3", "vacation4"]
-		},
-		{
-			"Name": "Angel",
-			"Image": "Angel",
-			"TimeToCall": "good time to call",
-			"LastTalked": "last talked 1 day ago",
-			"Availability": 4,
-			"Photos": ["dog1", "dog2", "dog3", "dog4"]
-		},
-		{
-			"Name": "David",
-			"Image": "David",
-			"TimeToCall": "ok time to call",
-			"LastTalked": "last talked 1 month ago",
-			"Availability": 3,
-			"Photos": ["grandpa1", "grandpa2", "grandpa3", "grandpa4"]
-		},
-		{
-			"Name": "Wendy",
-			"Image": "Wendy",
-			"TimeToCall": "not a good time to call",
-			"LastTalked": "last talked 1 week ago",
-			"Availability": 1,
-			"Photos": ["birthday1", "birthday2", "birthday3", "birthday4"]
-		}
-	]
-	}
+  "Caregiver": {
+    "Contacts": [
+      {
+        "Name": "Cristina",
+        "Image": "Cristina",
+        "TimeToCall": "now is a good time to call",
+        "LastTalked": "last talked 2 week ago",
+        "Availability": 5,
+        "RequestedOfMe": [
+          "Buy Glucosamine",
+          "Book airplane tickets for her next visit",
+          "Send more pictures of the kids",
+          "Help with her iPad"
+        ],
+        "RequestedOfOthers": [
+          "@Angel - Change the meal service provider",
+          "@David - Visit more often",
+          "@Wendy - Check my new prescription",
+          "@Edwin - Teach me how to use Uber"
+        ]
+      },
+      {
+        "Name": "Emma",
+        "Image": "Emma",
+        "TimeToCall": "2pm today is a time to call",
+        "LastTalked": "last talked 1 month ago",
+        "Availability": 4,
+        "RequestedOfMe": [
+          "Visit for Thanksgiving",
+          "Call more often",
+          "Call your sister",
+          "Help with her Uber"
+        ],
+        "RequestedOfOthers": [
+          "@Wendy - Change the meal service provider",
+          "@David - Visit more often",
+          "@Wendy - Check my new prescription",
+          "@Edwin - Teach me how to use Uber"
+        ]
+      },
+      {
+        "Name": "Angel",
+        "Image": "Angel",
+        "TimeToCall": "Saturday at 10am\nis a good time to call",
+        "LastTalked": "last talked 1 week ago",
+        "Availability": 3,
+        "RequestedOfMe": [
+          "Buy Glucosamine",
+          "Book airplane tickets for her next visit",
+          "Send more pictures of the kids",
+          "Help with her iPad"
+        ],
+        "RequestedOfOthers": [
+          "@Angel - Change the meal service provider",
+          "@David - Visit more often",
+          "@Wendy - Check my new prescription",
+          "@Edwin - Teach me how to use Uber"
+        ]
+      }
+    ]
+  },
+  "Senior": {
+    "Contacts": [
+      {
+        "Name": "Linda",
+        "Image": "Linda",
+        "TimeToCall": "now is a good time to call",
+        "LastTalked": "last talked 1 week ago",
+        "Availability": 5,
+        "Photos": [
+          "ballet1",
+          "ballet2",
+          "ballet3",
+          "camp1"
+        ]
+      },
+      {
+        "Name": "Edwin",
+        "Image": "Edwin",
+        "TimeToCall": "8pm is a good time to call",
+        "LastTalked": "last talked 2 week ago",
+        "Availability": 4,
+        "Photos": [
+          "vacation1",
+          "vacation2",
+          "vacation3",
+          "vacation4"
+        ]
+      },
+      {
+        "Name": "Angel",
+        "Image": "Angel",
+        "TimeToCall": "tomorrow at 10am\nis good time to call",
+        "LastTalked": "last talked 1 day ago",
+        "Availability": 4,
+        "Photos": [
+          "dog1",
+          "dog2",
+          "dog3",
+          "dog4"
+        ]
+      },
+      {
+        "Name": "David",
+        "Image": "David",
+        "TimeToCall": "Sunday at 2pm\nis a good time to call",
+        "LastTalked": "last talked 1 month ago",
+        "Availability": 3,
+        "Photos": [
+          "grandpa1",
+          "grandpa2",
+          "grandpa3",
+          "grandpa4"
+        ]
+      },
+      {
+        "Name": "Wendy",
+        "Image": "Wendy",
+        "TimeToCall": "Sunday at 8pm\nis a good time to call",
+        "LastTalked": "last talked 1 week ago",
+        "Availability": 1,
+        "Photos": [
+          "birthday1",
+          "birthday2",
+          "birthday3",
+          "birthday4"
+        ]
+      }
+    ]
+  }
 }
