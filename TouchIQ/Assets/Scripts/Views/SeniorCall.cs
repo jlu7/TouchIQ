@@ -25,6 +25,12 @@ public class SeniorCall : MonoBehaviour {
         remoteUserPanel.transform.Find("Callee").GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + UserDataController.GetInstance().CalleeImage);
         transform.Find("BottomBar/Tab/Name").GetComponent<Text>().text = UserDataController.GetInstance().CalleeUserName;
 
+        if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Senior)
+        {
+            transform.Find("BottomBar/InCall/Mic").gameObject.SetActive(false);
+            transform.Find("BottomBar/InCall/Sound").gameObject.SetActive(false);
+        }
+
         CalleeCanvasZoom = remoteUserPanel.GetComponent<RectTransform>();
         calleeCanvas = remoteUserPanel.transform.Find("VideoCallee").GetComponent<CanvasRenderer>();
         CalleeOriginalSize = remoteUserPanel.transform.Find("VideoCallee").GetComponent<RectTransform>().sizeDelta;

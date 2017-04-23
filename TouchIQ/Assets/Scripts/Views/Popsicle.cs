@@ -89,6 +89,7 @@ public class Popsicle : MonoBehaviour
         {
             CaregiverRequests.SetActive(false);
             SeniorAlbums.SetActive(true);
+            transform.Find("Bottom/ActionBar").gameObject.SetActive(false);
         }
     }
     /*
