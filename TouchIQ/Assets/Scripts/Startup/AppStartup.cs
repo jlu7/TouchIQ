@@ -15,20 +15,25 @@ public class AppStartup : MonoBehaviour
 
     IEnumerator Startup()
     {
+        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
         UserDataController.GetInstance().Initialize();
         while(UserDataController.GetInstance().ContactsUsers == null)
         {
             yield return null;
         }
+        
         SoundManager.GetInstance();
-        yield return null;
+        yield return new WaitForSeconds(.1f);
         StartCoroutine(NetworkController.GetInstance().Connect());
         SpeechController.GetInstance().Initialize();
         PhotoController.GetInstance().Initialize();
 
-        ViewController.GetInstance().Initialize(ViewAnchorRef.transform);
+        
 
         CheatController.GetInstance().Initialize(ViewAnchorRef.transform);
+
+        ContactsList cl = ViewController.GetInstance().CurrentView.GetComponent<ContactsList>();
+        cl.Initialize();
         //Initiate The Singletons
         //Transaction<List<TcgCard>> t = new Transaction<List<TcgCard>>();
     }

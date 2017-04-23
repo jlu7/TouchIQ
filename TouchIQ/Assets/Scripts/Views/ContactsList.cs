@@ -23,11 +23,6 @@ public class ContactsList : MonoBehaviour
     IEnumerator OnlyOneAnimation;
 
 
-    private void Awake ()
-    {
-        LoadData();
-    }
-
     public void AddBubbleToList(int rotationValue, int posValue)
     {
         GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
@@ -53,8 +48,10 @@ public class ContactsList : MonoBehaviour
         });
     }
 
-    private void Start()
+    public void Initialize()
     {
+        LoadData();
+
         MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
         BubbleList = new List<GameObject>();
 
