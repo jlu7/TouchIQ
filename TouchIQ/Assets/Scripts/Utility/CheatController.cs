@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,8 +73,11 @@ public class CheatController : MonoBehaviour {
         if((Input.touchCount == 3 || Input.GetKeyDown(KeyCode.Tab)) && acceptingInput)
         {
             //CheatScreen.SetActive(!CheatScreen.activeSelf);
-            CheatScreen.transform.SetAsLastSibling();
-            CheatScreen.GetComponent<Canvas>().enabled = !CheatScreen.GetComponent<Canvas>().enabled;
+            if (CheatScreen != null)
+            {
+                CheatScreen.transform.SetAsLastSibling();
+                CheatScreen.GetComponent<Canvas>().enabled = !CheatScreen.GetComponent<Canvas>().enabled;
+            }
             acceptingInput = false;
             StartCoroutine(WaitThenEnableInput());
         }
