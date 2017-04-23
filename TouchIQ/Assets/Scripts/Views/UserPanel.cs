@@ -41,7 +41,10 @@ public class UserPanel : MonoBehaviour
         IEShowScrollView = null;
         IEShowScrollView = coShowScrollView();
 
-        StartCoroutine(IEShowScrollView);
+        if (UserDataController.GetInstance().ActiveUserType != UserDataController.UserType.Senior)
+        {
+            StartCoroutine(IEShowScrollView);
+        }
     }
 
     public IEnumerator coShowScrollView()
