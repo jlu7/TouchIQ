@@ -67,14 +67,22 @@ public class CheatController : MonoBehaviour {
         UserTypeCheat.transform.Find("Text").GetComponent<Text>().text = "RESTART to see changes";
         UserTypeCheat.GetComponent<Button>().onClick.RemoveListener(ToggleUserType);
     }
-
+    bool acceptingInput = true;
     private void Update()
     {
-        if(Input.touchCount == 3 || Input.GetKeyDown(KeyCode.Tab))
+        if((Input.touchCount == 3 || Input.GetKeyDown(KeyCode.Tab)) && acceptingInput)
         {
             //CheatScreen.SetActive(!CheatScreen.activeSelf);
             CheatScreen.transform.SetAsLastSibling();
             CheatScreen.GetComponent<Canvas>().enabled = !CheatScreen.GetComponent<Canvas>().enabled;
+            acceptingInput = false;
+            StartCoroutine(WaitThenEnableInput());
         }
+    }
+
+    private IEnumerator WaitThenEnableInput()
+    {
+        yield return new WaitForSeconds(1f);
+        acceptingInput = true;
     }
 }

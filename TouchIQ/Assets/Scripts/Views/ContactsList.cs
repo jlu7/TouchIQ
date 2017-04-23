@@ -23,30 +23,7 @@ public class ContactsList : MonoBehaviour
     IEnumerator OnlyOneAnimation;
 
 
-    public void AddBubbleToList(int rotationValue, int posValue)
-    {
-        GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
-        GameObject Test = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
-        Image testImage0 = Test.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        testImage0.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Emma");
-        BubbleList.Add(Test);
-
-        Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
-        Test.GetComponent<RectTransform>().SetAsFirstSibling();
-
-        Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        Test.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
-        Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
-        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
-        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
-        Test.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
-            UserDataController.GetInstance().CalleeUserName = model[Test.GetComponent<ContactTag>().TagData].Name;
-            UserDataController.GetInstance().CalleeImage = model[Test.GetComponent<ContactTag>().TagData].Image;
-        });
-    }
+    
 
     public void Initialize()
     {
@@ -86,6 +63,8 @@ public class ContactsList : MonoBehaviour
             AddBubbleToList(0, 0);
             AddBubbleToList(-25, 25);
             AddBubbleToList(25, -25);
+            AddContactListBubble(50, -50);
+            AddContactAddBubble(-50, 50);
         }
         else
         {
@@ -94,8 +73,15 @@ public class ContactsList : MonoBehaviour
             AddBubbleToList(-50, 50);
             AddBubbleToList(50, -50);
             AddBubbleToList(25, -25);
+            AddContactListBubble(75, -75);
+            AddContactAddBubble(-75, 75);
         }
 
+        EnterAnimation();
+    }
+
+    private void AddContactListBubble(int rotationValue, int posValue)
+    {
         GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
         BubbleList.Add(ContactList);
         ContactList.GetComponent<RectTransform>().SetAsFirstSibling();
@@ -104,9 +90,14 @@ public class ContactsList : MonoBehaviour
         ContactList.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         ContactList.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
         ContactList.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
-        ContactList.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
-        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
+        ContactList.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
+        ContactList.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
 
+        
+    }
+
+    private void AddContactAddBubble(int rotationValue, int posValue)
+    {
         GameObject ContactAdd = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactAdd"), MiddleDial.GetComponent<RectTransform>());
         BubbleList.Add(ContactAdd);
         ContactAdd.GetComponent<RectTransform>().SetAsFirstSibling();
@@ -115,8 +106,8 @@ public class ContactsList : MonoBehaviour
         ContactAdd.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         ContactAdd.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
         ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
-        ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -75);
-        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 75);
+        ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
+        ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
 
         FillWithData();
         Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
@@ -126,8 +117,31 @@ public class ContactsList : MonoBehaviour
         {
             BubbleList[0].GetComponent<Button>().onClick.Invoke();
         }
+    }
 
-        EnterAnimation();
+    private void AddBubbleToList(int rotationValue, int posValue)
+    {
+        GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
+        GameObject Test = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
+        Image testImage0 = Test.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        testImage0.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Emma");
+        BubbleList.Add(Test);
+
+        Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
+        Test.GetComponent<RectTransform>().SetAsFirstSibling();
+
+        Test.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        Test.GetComponent<RectTransform>().localScale = new Vector3(.5f, .5f, 1);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
+        Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
+        Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
+        Test.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
+            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
+            UserDataController.GetInstance().CalleeUserName = model[Test.GetComponent<ContactTag>().TagData].Name;
+            UserDataController.GetInstance().CalleeImage = model[Test.GetComponent<ContactTag>().TagData].Image;
+        });
     }
 
     void LoadData()
