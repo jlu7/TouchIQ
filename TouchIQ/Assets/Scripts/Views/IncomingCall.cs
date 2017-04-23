@@ -38,13 +38,13 @@ public class IncomingCall : MonoBehaviour
             UserDataController.GetInstance().CalleeImage = "Linda";
             UserDataController.GetInstance().CalleeImage = "Linda";
 
-            UserDataController.GetInstance().UserImage = "Wendy";
-            UserDataController.GetInstance().UserName = "Wendy";
+            UserDataController.GetInstance().UserImage = "Emma";
+            UserDataController.GetInstance().UserName = "Emma";
         }
         else
         {
-            UserDataController.GetInstance().CalleeImage = "Wendy";
-            UserDataController.GetInstance().CalleeImage = "Wendy";
+            UserDataController.GetInstance().CalleeImage = "Emma";
+            UserDataController.GetInstance().CalleeImage = "Emma";
 
             UserDataController.GetInstance().UserImage = "Linda";
             UserDataController.GetInstance().UserName = "Linda";

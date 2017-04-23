@@ -51,8 +51,8 @@ public class ContactsList : MonoBehaviour
             }
             else
             {
-                UserDataController.GetInstance().UserName = "Wendy";
-                UserDataController.GetInstance().UserImage = "Wendy";
+                UserDataController.GetInstance().UserName = "Emma";
+                UserDataController.GetInstance().UserImage = "Emma";
             }
 
             TransitionToCall();
