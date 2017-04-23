@@ -32,6 +32,23 @@ public class IncomingCall : MonoBehaviour
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             StartCoroutine(StopRotatingDotRings());
         });
+
+        if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Senior)
+        {
+            UserDataController.GetInstance().CalleeImage = "Linda";
+            UserDataController.GetInstance().CalleeImage = "Linda";
+
+            UserDataController.GetInstance().UserImage = "Wendy";
+            UserDataController.GetInstance().UserName = "Wendy";
+        }
+        else
+        {
+            UserDataController.GetInstance().CalleeImage = "Wendy";
+            UserDataController.GetInstance().CalleeImage = "Wendy";
+
+            UserDataController.GetInstance().UserImage = "Linda";
+            UserDataController.GetInstance().UserName = "Linda";
+        }
     }
 
     protected IEnumerator RotateDotRings()

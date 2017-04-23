@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,11 +18,18 @@ public class UserDataController : MonoBehaviour {
 
     public ContactsUsersModel ContactsUsers;
 
+    public string UserImage = "";
+    public string UserName = "";
+
+    public string CalleeImage = "";
+    public string CalleeUserName = "";
+
     public enum UserType
     {
         Caregiver,
         Senior
     }
+
     public UserType ActiveUserType = UserType.Caregiver;
 
     public void Initialize()

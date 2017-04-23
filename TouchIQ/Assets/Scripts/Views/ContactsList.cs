@@ -26,8 +26,6 @@ public class ContactsList : MonoBehaviour
     private void Awake ()
     {
         LoadData();
-
-        
     }
 
     public void AddBubbleToList(int rotationValue, int posValue)
@@ -50,6 +48,8 @@ public class ContactsList : MonoBehaviour
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
             RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
+            UserDataController.GetInstance().CalleeUserName = model[Test.GetComponent<ContactTag>().TagData].Name;
+            UserDataController.GetInstance().CalleeImage = model[Test.GetComponent<ContactTag>().TagData].Image;
         });
     }
 
@@ -70,6 +70,17 @@ public class ContactsList : MonoBehaviour
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
             SoundManager.GetInstance().PlaySingle("SoundFX/Ringing_Phone", true);
+            if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
+            {
+                UserDataController.GetInstance().UserName = "Linda";
+                UserDataController.GetInstance().UserImage = "Linda";
+            }
+            else
+            {
+                UserDataController.GetInstance().UserName = "Wendy";
+                UserDataController.GetInstance().UserImage = "Wendy";
+            }
+
             TransitionToCall();
         });
 
@@ -87,8 +98,6 @@ public class ContactsList : MonoBehaviour
             AddBubbleToList(50, -50);
             AddBubbleToList(25, -25);
         }
-
-
 
         GameObject ContactList = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/FrontPageButtons/ContactList"), MiddleDial.GetComponent<RectTransform>());
         BubbleList.Add(ContactList);
@@ -115,6 +124,11 @@ public class ContactsList : MonoBehaviour
         FillWithData();
         Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
         RotateArrow(BubbleList[2].transform.Find("Circle").GetComponent<RectTransform>().localRotation, img.sprite, 2);
+
+        if (BubbleList.Count > 0)
+        {
+            BubbleList[0].GetComponent<Button>().onClick.Invoke();
+        }
 
         EnterAnimation();
     }
@@ -179,7 +193,6 @@ public class ContactsList : MonoBehaviour
         MiddleDial.transform.Find("ImageMask/Image").GetComponent<Image>().sprite = image;
         MiddleDial.transform.Find("FillingBar").GetComponent<Image>().fillAmount = (float)model[tagData].Availability / 5f;
         MiddleDial.transform.Find("FillingBar").GetComponent<Image>().color = availabilityColors[model[tagData].Availability];
-        
 
         float speed = 500;
         while (MiddleDial.transform.Find("ArrowOrigin").GetComponent<RectTransform>().localRotation.z != -rotateTo.z)

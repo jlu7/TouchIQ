@@ -18,6 +18,7 @@ public class UserPanel : MonoBehaviour
         ScrollView = this.transform.Find("Mask/ScrollView").GetComponent<RectTransform>();
         ButtonComponent.onClick.AddListener(ShowScrollView);
         LocalViewCanvas = transform.Find("Mask/Mask/BG").GetComponent<CanvasRenderer>();
+        transform.Find("Mask/Mask/BG").GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + UserDataController.GetInstance().UserImage);
 
         VideoChat.localView = true;
         if(Application.platform == RuntimePlatform.Android)

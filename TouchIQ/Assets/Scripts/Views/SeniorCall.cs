@@ -22,6 +22,9 @@ public class SeniorCall : MonoBehaviour {
         SoundManager.GetInstance().StopAllLoopingSoundEffects();
 
         remoteUserPanel = transform.Find("Panel").gameObject;
+        remoteUserPanel.transform.Find("Callee").GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + UserDataController.GetInstance().CalleeImage);
+        transform.Find("BottomBar/Tab/Name").GetComponent<Text>().text = UserDataController.GetInstance().CalleeUserName;
+
         CalleeCanvasZoom = remoteUserPanel.GetComponent<RectTransform>();
         calleeCanvas = remoteUserPanel.transform.Find("VideoCallee").GetComponent<CanvasRenderer>();
         CalleeOriginalSize = remoteUserPanel.transform.Find("VideoCallee").GetComponent<RectTransform>().sizeDelta;
@@ -38,6 +41,7 @@ public class SeniorCall : MonoBehaviour {
         localUserPanel = transform.Find("UserPanel").gameObject;
         UserPanelRef = localUserPanel.AddComponent<UserPanel>();
         endCall = transform.Find("BottomBar/InCall/EndCall").GetComponent<Button>();
+
         endCall.onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/pop_drip");
