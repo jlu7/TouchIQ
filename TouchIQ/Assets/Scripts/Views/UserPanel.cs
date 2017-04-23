@@ -82,6 +82,9 @@ public class UserPanel : MonoBehaviour
     {
         
         if (null != VideoChat.localViewTexture)
+        {
+            LocalViewCanvas.gameObject.GetComponent<Image>().color = Color.white;
             LocalViewCanvas.SetTexture(VideoChat.localViewTexture);
+        }
     }
 }
