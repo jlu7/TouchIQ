@@ -73,11 +73,11 @@ public class SeniorCall : MonoBehaviour {
     void OnVideoStart()
     {
         //remoteUserPanel.SetActive(false);
-        if (Application.platform != RuntimePlatform.Android)
-        {
+        //if (Application.platform != RuntimePlatform.Android)
+        //{
             calleeCanvas.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 90));
             calleeCanvas.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
-        }
+        //}
     }
 
     private void ReceivedNetworkPhoto(string setName, string photoName)

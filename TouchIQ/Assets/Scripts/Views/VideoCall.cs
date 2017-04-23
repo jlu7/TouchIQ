@@ -12,7 +12,7 @@ public class VideoCall : Photon.MonoBehaviour
     public VideoQuality videoQuality;
     public AudioQuality audioQuality;
     public Compression compression;
-    public EchoCancellation echoCancellation;
+    public EchoCancellation echoCancellation = EchoCancellation.off;
 
     public int numberReceivers = 2;
 
@@ -49,6 +49,7 @@ public class VideoCall : Photon.MonoBehaviour
         //audioView.observed = this;
         //audioView.ObservedComponents.Add(this);
         audioView.viewID = 1;
+        VideoChat.AddAudio(this.transform.Find("AudioIn").GetComponent<AudioSource>(), this.transform.Find("AudioOut").GetComponent<AudioSource>());
 
         videoView = gameObject.AddComponent<PhotonView>();
         videoView.synchronization = ViewSynchronization.Off;
@@ -312,6 +313,7 @@ public class VideoCall : Photon.MonoBehaviour
     [PunRPC]
     void ReceiveAudio(int micPosition, int length, byte[] audioData, double timestamp)
     {
+        UnityEngine.Debug.LogWarning("AUDIO: " + micPosition + " , " + length + " , " + timestamp);
         VideoChat.ToAudio(micPosition, length, audioData, timestamp);
     }
 
