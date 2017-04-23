@@ -56,6 +56,7 @@ public class ContactsList : MonoBehaviour
             }
 
             TransitionToCall();
+            callButton.onClick.RemoveAllListeners();
         });
 
         if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
