@@ -18,6 +18,7 @@ public class ContactsList : MonoBehaviour
     GameObject MiddleDial;
     Popsicle _Popsicle;
     List<GameObject> BubbleList;
+    List<GameObject> UserBubbleList;
     List<ContactModel> model;
 
     IEnumerator OnlyOneAnimation;
@@ -31,6 +32,7 @@ public class ContactsList : MonoBehaviour
 
         MainPanel = this.GetComponent<RectTransform>().Find("Image").GetComponent<RectTransform>();
         BubbleList = new List<GameObject>();
+        UserBubbleList = new List<GameObject>();
 
         GameObject popsicle = UICreate.InstantiateRectTransformPrefab(Resources.Load<GameObject>("Prefabs/ContactsScreen/Popsicle"), MainPanel.GetComponent<RectTransform>());
         _Popsicle = popsicle.GetComponent<Popsicle>();
@@ -61,21 +63,30 @@ public class ContactsList : MonoBehaviour
 
         if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
         {
-            AddBubbleToList(0, 0);
-            AddBubbleToList(-25, 25);
-            AddBubbleToList(25, -25);
+            AddBubbleToList(0, 0, model[0]);
+            AddBubbleToList(-25, 25, model[1]);
+            AddBubbleToList(25, -25, model[2]);
             AddContactListBubble(50, -50);
             AddContactAddBubble(-50, 50);
         }
         else
         {
-            AddBubbleToList(0, 0);
-            AddBubbleToList(-25, 25);
-            AddBubbleToList(-50, 50);
-            AddBubbleToList(50, -50);
-            AddBubbleToList(25, -25);
+            AddBubbleToList(0, 0, model[0]);
+            AddBubbleToList(-25, 25, model[1]);
+            AddBubbleToList(-50, 50, model[2]);
+            AddBubbleToList(50, -50, model[3]);
+            AddBubbleToList(25, -25, model[4]);
             AddContactListBubble(75, -75);
             AddContactAddBubble(-75, 75);
+        }
+
+        //FillWithData();
+        //Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        //RotateArrow(BubbleList[2].transform.Find("Circle").GetComponent<RectTransform>().localRotation, img.sprite, model[2]);
+
+        if (BubbleList.Count > 0)
+        {
+            BubbleList[0].GetComponent<Button>().onClick.Invoke();
         }
 
         EnterAnimation();
@@ -110,23 +121,17 @@ public class ContactsList : MonoBehaviour
         ContactAdd.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
         ContactAdd.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
 
-        FillWithData();
-        Image img = BubbleList[2].transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
-        RotateArrow(BubbleList[2].transform.Find("Circle").GetComponent<RectTransform>().localRotation, img.sprite, 2);
-
-        if (BubbleList.Count > 0)
-        {
-            BubbleList[0].GetComponent<Button>().onClick.Invoke();
-        }
+        
     }
 
-    private void AddBubbleToList(int rotationValue, int posValue)
+    private void AddBubbleToList(int rotationValue, int posValue, ContactModel contactMod)
     {
         GameObject bubble = Resources.Load<GameObject>("Prefabs/FrontPageButtons/Bubble");
         GameObject Test = UICreate.InstantiateRectTransformPrefab(bubble, MiddleDial.GetComponent<RectTransform>());
         Image testImage0 = Test.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
         testImage0.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/Emma");
         BubbleList.Add(Test);
+        UserBubbleList.Add(Test);
 
         Test.GetComponent<RectTransform>().SetParent(MiddleDial.transform);
         Test.GetComponent<RectTransform>().SetAsFirstSibling();
@@ -136,13 +141,23 @@ public class ContactsList : MonoBehaviour
         Test.transform.Find("Circle").GetComponent<RectTransform>().localPosition = new Vector3(0, 0);
         Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, rotationValue);
         Test.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, posValue);
-        Test.GetComponent<Button>().onClick.AddListener(() =>
+        Test.AddComponent<ContactTag>().Initialize(contactMod, RotateArrow);
+
+        Image img = Test.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
+        img.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + contactMod.Image);
+        Image fillingBar = Test.transform.Find("Circle/FillingBar").GetComponent<Image>();
+        fillingBar.fillAmount = (float)contactMod.Availability / 5f;
+        fillingBar.color = availabilityColors[contactMod.Availability];
+        //fillingBar.Rebuild(CanvasUpdate.PreRender);
+        UnityEngine.Debug.Log(fillingBar.color.r);
+        /*Test.GetComponent<Button>().onClick.AddListener(() =>
         {
             SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
-            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
-            UserDataController.GetInstance().CalleeUserName = model[Test.GetComponent<ContactTag>().TagData].Name;
-            UserDataController.GetInstance().CalleeImage = model[Test.GetComponent<ContactTag>().TagData].Image;
-        });
+            //RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
+            RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, Test);
+            UserDataController.GetInstance().CalleeUserName = Test.GetComponent<ContactTag>().TagData.Name;
+            UserDataController.GetInstance().CalleeImage = Test.GetComponent<ContactTag>().TagData.Image;
+        });*/
     }
 
     void LoadData()
@@ -157,24 +172,39 @@ public class ContactsList : MonoBehaviour
         
     }
 
-    void FillWithData()
+    /*void FillWithData()
     {
-        for (int i = 0; i < model.Count; i++)
+        List<ContactModel> contactModels = null;
+        int userCount = 0;
+        if (UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
         {
-            GameObject contactObject = BubbleList[i];
-            ContactModel contactModel = model[i];
+            contactModels = UserDataController.GetInstance().ContactsUsers.Caregiver.Contacts;
+            userCount = 1;
+        }
+        else
+        {
+            contactModels = UserDataController.GetInstance().ContactsUsers.Senior.Contacts;
+            userCount = 5;
+        }
 
-            contactObject.AddComponent<ContactTag>().TagData = i;
+        for (int i = 0; i < userCount; i++)
+        {
+            GameObject contactObject = UserBubbleList[i];
+            ContactModel contactModel = contactModels[i];
+
+            ContactTag tag = contactObject.AddComponent<ContactTag>();
+            tag.Initialize(contactModel, RotateArrow);
+
 
             Image img = contactObject.transform.Find("Circle/ImageMask/Image").GetComponent<Image>();
             img.sprite = Resources.Load<Sprite>("Textures/Photos/Profile/" + contactModel.Image);
             Image fillingBar = contactObject.transform.Find("Circle/FillingBar").GetComponent<Image>();
             fillingBar.fillAmount = (float)contactModel.Availability / 5f;
             fillingBar.color = availabilityColors[contactModel.Availability];
-            fillingBar.Rebuild(CanvasUpdate.PreRender);
+            //fillingBar.Rebuild(CanvasUpdate.PreRender);
             UnityEngine.Debug.Log(fillingBar.color.r);
         }
-    }
+    }*/
 
     private Dictionary<int, Color> availabilityColors = new Dictionary<int, Color>()
     {
@@ -188,23 +218,30 @@ public class ContactsList : MonoBehaviour
 
     private IEnumerator coRotateArrowIE = null;
 
-    private void RotateArrow(Quaternion rotateTo, Sprite image, int tagData)
+    private void RotateArrow(GameObject bubble)
     {
+        _Popsicle.SetUserPopsicleInfo(bubble.GetComponent<ContactTag>().Model);
+        UnityEngine.Debug.Log("1. ContactsList contactmodel: " + bubble.GetComponent<ContactTag>().Model.Name);
         if (coRotateArrowIE != null)
         {
             StopCoroutine(coRotateArrowIE);
         }
         coRotateArrowIE = null;
-        coRotateArrowIE = coRotateArrow(rotateTo, image, tagData);
+        coRotateArrowIE = coRotateArrow(bubble);
 
         StartCoroutine(coRotateArrowIE);
     }
 
-    private IEnumerator coRotateArrow(Quaternion rotateTo, Sprite image, int tagData)
+    private IEnumerator coRotateArrow(GameObject bubble)
     {
-        MiddleDial.transform.Find("ImageMask/Image").GetComponent<Image>().sprite = image;
-        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().fillAmount = (float)model[tagData].Availability / 5f;
-        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().color = availabilityColors[model[tagData].Availability];
+        Quaternion rotateTo = bubble.transform.Find("Circle").GetComponent<RectTransform>().localRotation;
+
+        MiddleDial.transform.Find("ImageMask/Image").GetComponent<Image>().sprite = bubble.transform.Find("Circle/ImageMask/Image").GetComponent<Image>().sprite;
+        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().fillAmount = (float)bubble.GetComponent<ContactTag>().Model.Availability / 5f;
+        MiddleDial.transform.Find("FillingBar").GetComponent<Image>().color = availabilityColors[bubble.GetComponent<ContactTag>().Model.Availability];
+
+        UnityEngine.Debug.Log("2. ContactsList bubble position: " + bubble.transform.localPosition);
+        UnityEngine.Debug.Log("3. ContactsList contactmodel: " + bubble.GetComponent<ContactTag>().Model.Name);
 
         float speed = 500;
         while (MiddleDial.transform.Find("ArrowOrigin").GetComponent<RectTransform>().localRotation.z != -rotateTo.z)
@@ -217,7 +254,8 @@ public class ContactsList : MonoBehaviour
                 new Quaternion(rotateTo.x, rotateTo.y, -rotateTo.z, rotateTo.w), step);
             yield return null;
         }
-        _Popsicle.SetUserPopsicleInfo(model[tagData]);
+        UnityEngine.Debug.Log("4. ContactsList contactmodel: " + bubble.GetComponent<ContactTag>().Model.Name);
+        
     }
 
     public void IncomingCall()
@@ -370,5 +408,25 @@ public class ContactsList : MonoBehaviour
 
 public class ContactTag : MonoBehaviour
 {
-    public int TagData;
+    //public ContactModel TagData;
+    public ContactModel Model;
+
+    private System.Action<GameObject> rotateAction;
+
+    public void Initialize(ContactModel contactModel, System.Action<GameObject> rotateAction)
+    {
+        Model = contactModel;
+        this.rotateAction = rotateAction;
+
+        this.GetComponent<Button>().onClick.AddListener(ClickHandler);
+    }
+
+    void ClickHandler()
+    {
+        SoundManager.GetInstance().PlaySingle("SoundFX/music_marimba_chord");
+        //RotateArrow(Test.transform.Find("Circle").GetComponent<RectTransform>().localRotation, testImage0.sprite, Test.GetComponent<ContactTag>().TagData);
+        rotateAction(this.gameObject);
+        UserDataController.GetInstance().CalleeUserName = Model.Name;
+        UserDataController.GetInstance().CalleeImage = Model.Image;
+    }
 }
