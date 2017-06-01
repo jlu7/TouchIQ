@@ -42,12 +42,12 @@ public class PhotoController : MonoBehaviour {
         return null;
     }
 
-    private void OnPhotoContextWord(List<string> contextWords)
+    public void OnPhotoContextWord(List<string> contextWords)
     {
         bool setChanged = false;
         foreach(PhotoSet set in photoLibrary.PhotoSets)
         {
-            if(set.Name.ToLower() == contextWords[0])
+            if(set.Name.ToLower() == contextWords[0].ToLower())
             {
                 ActiveSet = set;
                 setChanged = true;

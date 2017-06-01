@@ -21,6 +21,7 @@ public class PictureSelector : MonoBehaviour {
 
     void SetActivePhotos(PhotoSet activeSet)
     {
+        UnityEngine.Debug.LogWarning("Photoset: " + activeSet.Name);
         List<LayoutElement> les = sv.content.GetComponent<VerticalLayoutGroup>().GetComponentsInChildren<LayoutElement>().ToList();
         foreach (LayoutElement le in les)
         {

@@ -63,6 +63,35 @@ public class SeniorCall : MonoBehaviour {
         DragSlot dragComponent = transform.Find("SharedPhoto/DragSlot").gameObject.AddComponent<DragSlot>();
         dragComponent.method += PhotoDragHandler;
         NetworkController.GetInstance().OnPhotoReceived += ReceivedNetworkPhoto;
+        if(UserDataController.GetInstance().ActiveUserType == UserDataController.UserType.Caregiver)
+        {
+            //CHEAT
+            transform.Find("Cheat/Ballet").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                var str = new List<string>();
+                str.Add("Ballet");
+                PhotoController.GetInstance().OnPhotoContextWord(str);
+            });
+            transform.Find("Cheat/Baby").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                var str = new List<string>();
+                str.Add("Baby");
+                PhotoController.GetInstance().OnPhotoContextWord(str);
+            });
+            transform.Find("Cheat/Grandpa").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                var str = new List<string>();
+                str.Add("Grandpa");
+                PhotoController.GetInstance().OnPhotoContextWord(str);
+            });
+            transform.Find("Cheat/Vacation").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                var str = new List<string>();
+                str.Add("Vacation");
+                PhotoController.GetInstance().OnPhotoContextWord(str);
+            });
+        }
+        
     }
 
     void OnDestroy()
